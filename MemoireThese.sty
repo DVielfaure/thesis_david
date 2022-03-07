@@ -1,0 +1,379 @@
+%% Module de définitions spécifiques au format de rédaction des
+%% mémoires et thèses de l'École Polytechnique de Montréal.
+%%
+%% Auteur : Stéphane Ouellette
+%%
+%% Date de création: 2005-04-20
+%% Mise à jour:      2009-11-02
+%% Mise à jour:      2014-06-12  Benoît Ozell
+%% Mise à jour:      2014-10-02  Benoît Ozell
+%%
+%% Notes : Le format de rédaction exige que les titres des chapitres
+%% soient centrés. Le code suivant provient de la classe "book" et a
+%% été modifié pour prendre en compte ces considérations. De plus,
+%% l'espacement vertical de 50 points a été mis en commentaire.
+%% Plusieurs fonctions proviennent d'un autre gabarit.
+\NeedsTeXFormat{LaTeX2e}[1995/12/01]
+\ProvidesPackage{MemoireThese}
+             [2005/04/20 v1.0
+                 Poly-specific LaTeX package (Revised chapter titles)]
+
+\DeclareOption{french}{\@frenchtrue\OptionNotUsed}\newif\if@french
+\DeclareOption{english}{\@englishtrue}\newif\if@english
+\ProcessOptions\relax
+
+\def\@makeappendixhead#1{%
+  {\parindent \z@ \raggedright \normalfont
+    \centering
+    \ifnum \c@secnumdepth >\m@ne
+      \if@mainmatter
+        \if@english
+			\normalsize\bfseries APPENDIX\space\thechapter
+		\else		
+			\normalsize\bfseries ANNEXE\space\thechapter
+        \fi
+		%\par\nobreak
+        %\vskip 20\p@
+        \space\space\space\space
+      \fi
+    \fi
+    \interlinepenalty\@M
+     \normalsize \bfseries {\MakeUppercase{#1}}\par\nobreak
+    \vskip 40\p@
+  }}
+
+\def\@makechapterhead#1{%
+  {\parindent \z@ \raggedright \normalfont
+    \centering
+    \ifnum \c@secnumdepth >\m@ne
+      \if@mainmatter
+		\if@english
+		  \normalsize\bfseries CHAPTER\space\thechapter
+		\else
+        	  \normalsize\bfseries CHAPITRE\space\thechapter
+		\fi        
+		%\par\nobreak
+        %\vskip 20\p@
+        \space\space\space\space
+      \fi
+    \fi
+    \interlinepenalty\@M
+    \normalsize \bfseries #1\par\nobreak
+    \vskip 35\p@
+  }}
+
+\def\@makeschapterhead#1{%
+  {\parindent \z@ \raggedright
+    \centering
+    \normalfont
+    \interlinepenalty\@M
+    \normalsize \bfseries #1\par\nobreak
+    \vskip 35\p@
+  }}
+
+\renewcommand\section{\@startsection {section}{1}{\z@}%
+                                   {-3ex \@plus -1ex \@minus -.2ex}%
+                                   {1.75ex \@plus.2ex}%
+                                   {\normalfont\normalsize\bfseries}}
+\renewcommand\subsection{\@startsection{subsection}{2}{\z@}%
+                                     {-2.75ex\@plus -1ex \@minus -.2ex}%
+                                     {1ex \@plus .2ex}%
+                                     {\normalfont\normalsize\bfseries}}
+\renewcommand\subsubsection{\@startsection{subsubsection}{3}{\z@}%
+                                     {-2.75ex\@plus -1ex \@minus -.2ex}%
+                                     {1ex \@plus .2ex}%
+                                     {\normalfont\normalsize\bfseries}}
+\renewcommand\paragraph{\@startsection{paragraph}{4}{\z@}%
+                                    {2.75ex \@plus1ex \@minus.2ex}%
+                                    {-1em}%
+                                    {\normalfont\normalsize\bfseries}}
+
+\long\def\@makecaption#1#2{%
+  \vskip\abovecaptionskip
+  \sbox\@tempboxa{#1 #2}%
+  \ifdim \wd\@tempboxa >\hsize
+    #1 #2\par
+  \else
+    \global \@minipagefalse
+    \hb@xt@\hsize{\hfil\box\@tempboxa\hfil}%
+  \fi
+  \vskip\belowcaptionskip}
+
+
+% Définition de \caption pour inclure le mot FIGURE ou TABLEAU.
+\def\caption{\refstepcounter\@captype \@dblarg{\@caption\@captype}}
+\long\def\@caption#1[#2]#3{%
+  \par
+  \addcontentsline{\csname ext@#1\endcsname}{#1}%
+    {\protect\numberline{\csname fnum@#1\endcsname}{\ignorespaces #2}}%
+  \begingroup
+    \@parboxrestore
+    \if@minipage
+      \@setminipage
+    \fi
+    \normalsize
+    \@makecaption{\csname fnum@#1\endcsname}{\ignorespaces #3}\par
+  \endgroup}
+
+\def\LT@c@ption#1[#2]#3{%
+  \LT@makecaption#1\fnum@table{#3}%
+  \def\@tempa{#2}%
+  \ifx\@tempa\@empty\else
+    {\let\\\space
+    \addcontentsline{lot}{table}{\protect\numberline{\fnum@table}{\ignorespaces #2}}}%
+  \fi}
+
+\def\LT@makecaption#1#2#3{%
+  \LT@mcol\LT@cols c{\hbox to\z@{\hss\parbox[t]\LTcapwidth{%
+    \sbox\@tempboxa{#1{#2 }#3}%
+    \ifdim\wd\@tempboxa>\hsize
+      #1{#2 }#3%
+    \else
+      \hbox to\hsize{\hfil\box\@tempboxa\hfil}%
+    \fi
+    \endgraf\vskip\baselineskip}%
+  \hss}}}
+
+% Remplace les abréviations ``Fig.'' et ``Tab.'' par ``Figure'' et ``Tableau''.
+\if@english
+	\addto\captionsfrench{\renewcommand\figurename{Figure}\renewcommand\tablename{Table}}
+\else
+	\addto\captionsfrench{\renewcommand\figurename{Figure}\renewcommand\tablename{Tableau}}
+\fi 
+
+% Ajustement des marges selon le format de l'École.
+\setlength{\voffset}{0in}
+\setlength{\hoffset}{0in}
+\setlength{\topmargin}{-1.28cm}
+\setlength{\oddsidemargin}{-0.04cm}
+\setlength{\evensidemargin}{-0.04cm}
+\setlength{\headheight}{12pt}
+\setlength{\headsep}{22pt}
+\setlength{\textwidth}{16.59cm}
+\setlength{\textheight}{22.94cm}
+\setlength{\marginparwidth}{0in}
+\setlength{\marginparsep}{0in}
+\setlength{\parindent}{0in}
+\setlength{\parskip}{1ex}
+
+% Ajoute un espacement sous le titre d'un tableau.
+\setlength\belowcaptionskip{10pt}
+
+% La commande \Chapter réinitialise le compteur de figures, de
+% tableaux et de notes de bas de page au début de chaque nouveau chapitre.
+\newcommand{\Chapter}[1]{\chapter{#1}\setcounter{figure}{0}\setcounter{table}{0}\setcounter{footnote}{0}}
+
+% Numérotation des figures et des tableaux selon les critères de l'École.
+\renewcommand{\thefigure}{\thechapter.\arabic{figure}}
+\renewcommand{\thetable}{\thechapter.\arabic{table}}
+
+% Affichage des entrées dans la table des matières qui
+% correspondent aux chapitres.
+\renewcommand\l@chapter[2]{%
+  \ifnum \c@tocdepth >\m@ne
+    \addpenalty{-\@highpenalty}%
+    \vskip 1.0em \@plus\p@
+    \setlength\@tempdima{1.5em}%
+    \begingroup
+      \parindent \z@ \rightskip \@pnumwidth
+      \parfillskip -\@pnumwidth
+      \advance\leftskip\@tempdima
+      \hskip -\leftskip
+      \if@english
+        CHAPTER #1\nobreak\leaders\hbox{$\m@th
+        \mkern \@dotsep mu\hbox{.}\mkern \@dotsep
+        mu$}\hfill \nobreak\hb@xt@\@pnumwidth{\hss #2}\par
+      \else
+        CHAPITRE #1\nobreak\leaders\hbox{$\m@th
+        \mkern \@dotsep mu\hbox{.}\mkern \@dotsep
+        mu$}\hfill \nobreak\hb@xt@\@pnumwidth{\hss #2}\par
+      \fi    
+      \penalty\@highpenalty
+    \endgroup
+  \fi}
+
+
+% Affichage des entrées dans la table des matières qui ne
+% sont pas numérotées (par ex. Dédicace)
+\newcommand\l@compteur[2]{%
+  \ifnum \c@tocdepth >\m@ne
+    \addpenalty{-\@highpenalty}%
+    \vskip 1.0em \@plus\p@
+    \setlength\@tempdima{1.5em}%
+    \begingroup
+      \parindent \z@ \rightskip \@pnumwidth
+      \parfillskip -\@pnumwidth
+      \advance\leftskip\@tempdima
+      \hskip -\leftskip
+      #1\nobreak\leaders\hbox{$\m@th
+        \mkern \@dotsep mu\hbox{.}\mkern \@dotsep
+        mu$}\hfill \nobreak\hb@xt@\@pnumwidth{\hss #2}\par
+      \penalty\@highpenalty
+    \endgroup
+  \fi}
+
+\def\@chapter[#1]#2{\ifnum \c@secnumdepth >\m@ne
+                       \if@mainmatter
+                         \refstepcounter{chapter}%
+                         \typeout{\@chapapp\space\thechapter.}%
+                         \addcontentsline{toc}{chapter}%
+                                   {\protect\numberline{\thechapter}#1}%
+                       \else
+                         \addcontentsline{toc}{chapter}{#1}%
+                       \fi
+                    \else
+                      \addcontentsline{toc}{chapter}{#1}%
+                    \fi
+                    \chaptermark{#1}%
+                    \if@twocolumn
+                      \@topnewpage[\@makechapterhead{#2}]%
+                    \else
+                      \@makechapterhead{#2}%
+                      \@afterheading
+                    \fi}
+
+
+\newcommand\annexe{\if@openright\cleardoublepage\else\clearpage\fi
+                    \thispagestyle{plain}%
+                    \global\@topnum\z@
+                    \@afterindentfalse
+                    \secdef\@annexe\@schapter}
+
+\def\@annexe[#1]#2{\ifnum \c@secnumdepth >\m@ne
+                       \if@mainmatter
+                         \refstepcounter{chapter}%
+                         \typeout{\@chapapp\space\thechapter.}%
+                         \if@english
+                           \addcontentsline{app}{annexe}%
+                               {\protect\numberline{Appendix\nobreakspace\thechapter}#1}%
+		                 \else
+                             \addcontentsline{app}{annexe}%
+                               {\protect\numberline{Annexe\nobreakspace\thechapter}#1}%
+						 \fi  
+                       \else
+                         \addcontentsline{app}{annexe}{#1}%
+                       \fi
+                    \else
+                      \addcontentsline{app}{annexe}{#1}%
+                    \fi
+                    \chaptermark{#1}%
+                    \if@twocolumn
+                      \@topnewpage[\@makeappendixhead{#2}]%
+                    \else
+                      \@makeappendixhead{#2}%
+                      \@afterheading
+                    \fi}
+
+% On redéfinit les listes de figures et de tableaux ainsi que la
+% Table des Matières de façon à éviter que la dernière page
+% de chacune de ces listes soit inscrite dans la Table des Matières
+\renewcommand\listoffigures{%
+    \if@twocolumn
+      \@restonecoltrue\onecolumn
+    \else
+      \@restonecolfalse
+    \fi
+    \chapter*{\listfigurename}%
+      \addcontentsline{toc}{compteur}{\listfigurename}%
+      \@mkboth{\MakeUppercase\listfigurename}%
+              {\MakeUppercase\listfigurename}%
+    \@starttoc{lof}%
+    \if@restonecol\twocolumn\fi
+    }
+
+\renewcommand\listoftables{%
+    \if@twocolumn
+      \@restonecoltrue\onecolumn
+    \else
+      \@restonecolfalse
+    \fi
+    \chapter*{\listtablename}%
+      \addcontentsline{toc}{compteur}{\listtablename}%
+      \@mkboth{%
+          \MakeUppercase\listtablename}%
+         {\MakeUppercase\listtablename}%
+    \@starttoc{lot}%
+    \if@restonecol\twocolumn\fi
+    }
+
+\renewcommand\tableofcontents{%
+    \if@twocolumn
+      \@restonecoltrue\onecolumn
+    \else
+      \@restonecolfalse
+    \fi
+    \chapter*{\contentsname
+        \@mkboth{%
+           \MakeUppercase\contentsname}{\MakeUppercase\contentsname}}%
+       \addcontentsline{toc}{compteur}{\contentsname}%
+    \@starttoc{toc}%
+    \if@restonecol\twocolumn\fi
+    }
+
+\newcommand\listofappendices{%
+    \if@twocolumn
+      \@restonecoltrue\onecolumn
+    \else
+      \@restonecolfalse
+    \fi
+     \if@english
+       \chapter*{LIST OF APPENDICES}%
+         \addcontentsline{toc}{compteur}{LIST OF APPENDICES}%
+     \else
+       \chapter*{LISTE DES ANNEXES}%
+         \addcontentsline{toc}{compteur}{LISTE DES ANNEXES}%
+     \fi  
+
+
+    \@starttoc{app}%
+    \if@restonecol\twocolumn\fi
+    }
+
+\renewenvironment{thebibliography}[1]
+     {\chapter*{\bibname}%
+      \addcontentsline{toc}{compteur}{\bibname}
+      \@mkboth{\MakeUppercase\bibname}{\MakeUppercase\bibname}%
+      \list{\@biblabel{\@arabic\c@enumiv}}%
+           {\settowidth\labelwidth{\@biblabel{#1}}%
+            \leftmargin\labelwidth
+            \advance\leftmargin\labelsep
+            \@openbib@code
+            \usecounter{enumiv}%
+            \let\p@enumiv\@empty
+            \renewcommand\theenumiv{\@arabic\c@enumiv}}%
+      \sloppy
+      \clubpenalty4000
+      \@clubpenalty \clubpenalty
+      \widowpenalty4000%
+      \sfcode`\.\@m}
+     {\def\@noitemerr
+       {\@latex@warning{Empty `thebibliography' environment}}%
+      \endlist}
+
+
+\newcommand\PresidentJury[3]{%
+  \textbf{#3~\MakeUppercase{#2}}, président\ifthenelse{\equal{#1}{F}}{e}{}%
+  }
+
+\newcommand\DirecteurRecherche[3]{%
+  \textbf{#3~\MakeUppercase{#2}}, membre et direct\ifthenelse{\equal{#1}{M}}{eur}{rice} de recherche%
+  }
+
+\newcommand\CoDirecteurRecherche[3]{%
+  \textbf{#3~\MakeUppercase{#2}}, membre et codirect\ifthenelse{\equal{#1}{M}}{eur}{rice} de recherche%
+  }
+
+\newcommand\MembreJury[3]{%
+  \textbf{#3~\MakeUppercase{#2}}, membre%
+  }
+
+\newcommand\MembreExterneJury[3]{%
+  \textbf{#3~\MakeUppercase{#2}}, membre externe%
+  }
+
+% Espace requis pour les listes de figures, de tableaux et d'annexes.
+\def\l@table{\@dottedtocline{1}{0em}{7em}}
+\def\l@figure{\@dottedtocline{1}{0em}{7em}}
+\def\l@annexe{\@dottedtocline{1}{0em}{7em}}
+
+\endinput

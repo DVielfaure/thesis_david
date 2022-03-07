@@ -1,0 +1,24 @@
+%% Dédicace
+%%
+%% La dédicace est un hommage que l'auteur souhaite
+%% rendre à une ou plusieurs personnes de son choix.
+%%
+\ifthenelse{\equal{\Langue}{english}}{
+	\chapter*{DEDICATION}\thispagestyle{headings}
+	\addcontentsline{toc}{compteur}{DEDICATION}
+}{
+	\chapter*{DÉDICACE}\thispagestyle{headings}
+	\addcontentsline{toc}{compteur}{DÉDICACE}
+}
+
+\begin{flushright}
+  \itshape
+  Practice does not make perfect.\\
+  It is practice, followed by a night of sleep, that leads to perfection.\\ 
+\ldots
+\end{flushright}
+
+\begin{flushright}
+Matthew Walker,\\
+Why We Sleep: The New Science of Sleep and Dreams
+\end{flushright}

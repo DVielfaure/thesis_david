@@ -1,0 +1,144 @@
+﻿Gabarit LaTeX pour mémoires et thèses
+
+
+1) Introduction
+
+   Pour Linux, un Makefile est distribué afin d'automatiser le processus
+de recompilation. Toutefois, ce Makefile n'est offert qu'à titre d'exemple
+et peut devoir être modifié, selon la distribution de Linux utilisée.
+
+   Le processus de compilation permet de regénérer les graphiques et images
+produits à l'aide des logiciels Gnuplot et Dia. Il est préférable que toutes
+les images importées soient en format EPS (Encapsulated Postscript) ou en
+tout autre format d'image vectoriel. D'autres types d'images peuvent être
+supportés, selon la version de LaTeX.
+
+
+
+2) Répertoires
+
+   ./dia          Images générées par Dia, l'éditeur de diagrammes.
+                  Placez le fichier ".dia" dans ce répertoire et il
+                  sera compilé au besoin. Le fichier résultant porte
+                  l'extension ".png". Un exemple est fourni.
+
+   ./gnuplot      Graphiques générés par Gnuplot. Placez dans ce
+                  répertoire un fichier de directives avec l'extension
+		  ".gp" et le processus de compilation génèrera un fichier
+                  ".png" correspondant. Il faut spécifier dans le fichier Makefile
+                  les dépendances avec les fichiers de données afin de garantir
+                  la recompilation du graphique si les données changent.
+		  Un exemple est fourni.
+
+   ./images       Images statiques. Utilisez en autant que possible un format
+                  vectoriel (EPS, SVG, etc). Vous pouvez utilisez GIMP pour
+		  convertir les images.
+
+
+
+3) Les fichiers / The files
+
+   Makefile                     Dépendances entre les fichiers  (NE PAS MODIFIER)
+   MemoireThese.sty             Feuille de style                (NE PAS MODIFIER)
+   IEEEtran.bst                 Style bibliographique IEEE (NE PAS MODIFIER)
+   IEEEtran-francais.bst        Style bibliographique IEEE en français (NE PAS MODIFIER)
+   Document.tex                 Le fichier principal            (NE PAS MODIFIER)
+
+   0-Definitions_Etudiant.tex   Les données de l'étudiant.
+   1-Dedicace.tex               Dédicace de votre document.
+   2-Remerciements.tex          Remerciements adressés à certaines personnes.
+   3-Abstract.tex               Résumé du sujet en anglais.
+   3-Resume_sujet.tex           Résumé du sujet en français.
+   4-Sigles_Abrev.tex           Sigles et abréviations.
+   5-Introduction.tex           Chapitre d'introduction.
+   6-Revue_litterature.tex      Revue de littérature.
+   7-Theme1.tex			Premier thème (Doctorat) ou "Détails de la Solution" (Maîtrise).
+   7-Theme2.tex			Second thème (Doctorat) ou "Résultats théoriques et expérimentaux" (Maîtrise).
+   7-Theme3.tex			Troisième thème (Doctorat) ou effacez ce fichier si vous êtes à la Maîtrise.
+   8-Conclusion.tex             Conclusion
+   Document.bib                 Entrées bibliographiques. Exemples fournis.
+
+modules/
+   etexcmds.sty                 NE PAS MODIFIER
+   infwarerr.sty                NE PAS MODIFIER
+   soulutf8.sty                 NE PAS MODIFIER
+   aeguill.sty			NE PAS MODIFIER
+
+N.B. Dans le cas où vous rédigez un document qui ne comprend que deux
+thèmes plutôt que trois, veuiller simplement effacer Theme3.tex.
+
+
+4) Le document LaTeX / The LaTeX document
+
+   Il existe deux modes ("draft" et "final") pour le document LaTeX. Le mode "draft"
+génère un fichier DVI sans image, mais réserve l'espace pour ces dernières dans le
+texte. Le mode "draft" permet aussi de reconnaître facilement les débordements en
+fin de ligne car un carré noir est ajouté à la ligne fautive.
+
+   Le mode "final" permet de générer la version finale d'un document. Il inclut toutes
+les images mais n'identifie pas les lignes qui débordent dans la marge de droite.
+Vous devriez toujours lire les messages affichés par LaTeX afin de corriger les
+erreurs.
+
+   Lors d'un débordement en fin de ligne causé par un mot que LaTeX ne reconnaît pas,
+il est possible d'indiquer à celui-ci comment diviser le mot spécifiquement. Cette
+situation arrive le plus souvent avec des mots qui comprennent des accents. Par
+exemple, si le mot "stéréophonique" déborde en fin de ligne, il est possible d'écrire
+"sté\-réo\-pho\-ni\-que" pour indiquer à LaTeX comment il peut séparer les syllabes.
+
+
+4.1) Sous Linux / Linux
+
+   Le document LaTeX est compilé à l'aide de la commande "make". Celui-ci est
+recompilé autant de fois que requis afin d'éliminer les dépendances non résolues.
+De plus, il prend en charge la compilation de la bibliographie et regénère tous
+les fichiers dans les répertoires "gnuplot" et "dia".
+
+   La commande "make help" affiche toutes les options.
+
+   N.B. Selon la distribution de Linux utilisée, certains logiciels
+   peuvent devoir être installés manuellement.
+
+
+4.2) Sous Windows / Windows
+
+   Le gabarit Windows a été développé sous MikTeX 2.8.
+
+   Il faut compiler seulement le fichier Document.tex car les autres
+   fichier ".tex" sont inclus par ce premier.
+
+   ATTENTION: Le format d'encodage de tous les fichier ".tex" est UTF-8.
+
+
+5) Visualisation des résultats sous Linux / Visualize results under Linux
+
+   Afin de voir les résultats de la compilation, vous pouvez utiliser la commande
+XDVI (tapez "make show"). Ceci permet de voir les changements suite à une recompilation.
+
+
+6) Références LaTeX / Books on LaTeX
+
+
+The not so short introduction to LaTeX
+http://tobi.oetiker.ch/lshort/lshort.pdf
+
+
+"The LaTeX Companion". Frank Mittelbach et Michel Goosens. Addison Wesley.
+
+"Guide To LaTeX". Helmut Kopka. Addison Wesley.
+
+"The LaTeX Graphics Companion". Frank Mittelbach, Michel Goosens et al. Addison Wesley.
+
+"LaTeX: A Document Preparation System". Leslie Lamport. Addison Wesley.
+
+
+Le site web officiel de LaTeX avec tous les packages supplémentaires:
+http://www.ctan.org
+
+7) Support bilingue / Multilingual support
+
+Edit the following line at the master document:
+\newcommand\Langue{french}            % english or french
+
+8) Ce gabarit n'est pas compatible avec le module subcaption.
+   This template is not compatible with the subcaption package.

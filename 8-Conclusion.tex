@@ -1,0 +1,47 @@
+\Chapter{CONCLUSION}\label{sec:Conclusion}
+The work presented in the thesis aimed at improving the robustness of swarm robotic systems in the presence of risk. Result show that by introducing a conscience of risk in the algorithms developed, a better tolerance to danger was achieved by the swarm in comparison with our benchmarks. The thesis presented two risk-aware swarm algorithms used for the exploration of unknown environments:
+
+\begin{itemize}
+    \item DORA-Explorer: Distributed Online Risk-Aware Explorer
+    \item RASS: Risk-Aware Swarm Storage
+\end{itemize}
+
+Both algorithms achieved convincing results and are a contribution to fault tolerance in the field of swarm robotics. 
+
+%%
+%%  SYNTHESE DES TRAVAUX / SUMMARY OF WORKS
+%%
+\section{Summary of Works}
+We first presented DORA-Explorer, a risk-aware exploration
+algorithm that minimizes the risk to which robots expose themselves in
+order to maximize the amount of ground they will be able to cover. Leveraging distributed belief maps, DORA-Explorer greatly outperformed our benchmark algorithms in terms of exposure to risk. Result showed that our solution considerably reduces the likeliness of robot failures while keeping similar ground coverage performance compared to other solutions proposed in
+the literature. DORA-Explorer also showed good scalability thanks to its low
+communication costs and its fully decentralized nature. It also showed applicability to real world scenarios through experiments with physical robots. 
+
+Then, a fully decentralized risk-aware storing and routing algorithm (RASS) was presented. It leverages a fitness policy based on hop-count and risk to choose the fittest agents through which to route data items towards the base station. Our experiments showed that RASS consistently outperforms a hop-count based algorithm in terms of reliability across different topologies, both static and dynamic. RASS was also tested with physical robots and again showed convincing results. The physical experiments proved that the algorithm can easily be used on real world missions and will run the way it is intended to.
+
+%%
+%%  LIMITATIONS
+%%
+\section{Limitations}\label{sec:Limitations}
+In DORA-Explorer, simulations with varying ratios of risk gain $\alpha$ to exploration gain $\beta$ were conducted and showed that they have an impact of the performance of the algorithm. In our simulations, a ratio of $\alpha / \beta = 2$ provided the best results. Luckily, because we had a simulated environment, we could easily test with different values and choose the best one. However, testing with different values may not always be feasible and as a result, determining the right set of parameters for the algorithm to perform optimally is not completely solved.
+
+Additionally, the physical experiments performed to assess the real-world applicability of DORA-Explorer and RASS were carried on very small robot swarms. For DORA-Explorer, only three KheperaIV robots were used and for RASS five CogniFlies. Consequently, the scalability of the algorithms remains untested on real hardware. 
+
+%%
+%%  AMELIORATIONS FUTURES *-/ FUTURE RESEARCH
+%%
+\section{Future Research}
+
+%DORA-Explorer obstacle avoidance
+Specifically for DORA-Explorer, taking inspiration from obstacle avoidance algorithms could be an interesting future research direction. We could, in DORA-Explorer's distributed belief map, model the risk associated with the cells as a a probability of containing an obstacle. Using state of the art obstacles avoidance algorithms we could potentially avoid dangerous regions of the environment the same way you would avoid obstacles in the environment. However, some challenges remain in that regard. Risk is considered to be gradual, in opposition, obstacles are punctual. Obstacle avoidance algorithms try to guarantee to avoidance of obstacles. On the other hand, DORA-Explorer does not guarantee the avoidance of risk but instead tries to minimize exposure to it. Therefore, using obstacle avoidance algorithms would most certainly require some design changes.  
+
+%RASS network assumption
+Specifically for RASS, some additional work include understanding the impact of the communication network assumptions on the performance of RASS. For example, a network where there exists only a few routes towards the base station and where one is clearly safer than the other is of course well-suited for our algorithm. On the other hand, the value of RASS should decrease in well connected networks where the radiation sources are only located at the periphery of the network. Indeed, in this particular scenario, because data naturally moves away from the risk, RASS' risk-awareness shouldn't improve noticeably the network's reliability. Additional experiments with different network topologies would be a interesting future research direction and could provide insights on which topologies RASS is particularly valuable.
+
+%Real danger
+For both algorithms, additional experiments on real outdoors missions and with actual risk would be useful in determining their value. In both our simulations and physical experiments, risk in the environment was simulated and took the form of radiation. It would be worth testing the algorithms with real danger and confirm that the results are in line with what was seen in our simulations. However, we are aware that such experiments are costly and difficult to realize.
+
+%FLAM
+Finally, another potential future research direction would be to tackle the creation of the distributed belief map in a scenario where risk cannot be sensed by a sensor. Indeed, in both DORA-Explorer and RASS risk was modelled as point radiation sources that we suppose could by sensed by robots with a on-board sensor. However, in some scenario risk cannot be directly sensed. In that case, building the distributed belief map becomes problematic. A potential way to solve this would be the use fault detection methods to identify the hazardous locations of the environment. By knowing where failures have happened in the past, greater risk could be associated with regions where failures seem to happen more frequently. 
+

@@ -1,0 +1,62 @@
+\Chapter{LITERATURE REVIEW}\label{sec:RevLitt}
+
+%Intro to the chapter
+
+\section{Swarm Robotics}
+
+\section{Swarm programming}
+
+\section{Information sharing}
+
+\section{Routing}
+
+\section{Swarm exploration strategies}
+
+\section{Risk in swarm robotics}
+
+\section{Fault detection}
+
+%Taxonomy and approaches
+A taxonomy of the faults affecting robotic systems is presented in \cite{khalastchi2018fault}. Hardware faults affect physical components of the system. They compromise the sensing and acting abilities of the robots. Software faults affect the behaviour of the robots and are caused by faulty algorithms and/or faulty implementations. Interaction faults affect the dynamics of the robotic system and are caused by exogenous events. Hopefully, fault detection methods have been developed to mitigate the presence of faults in robotic systems. They are divided into three big families: data-driven; model-based; knowledge-based \cite{khalastchi2018fault}. 
+
+\begin{itemize}
+\item \textbf{Data-driven} approaches use sensor data and compare it to known faults, to past normal/abnormal behaviors or to the behavior of neighbour agents. Using statistical tools, data-driven approaches compute the deviation of the data and classify it as normal/abnormal depending on the extent of this deviation.  Recent data-driven approaches have applied machine learning for detecting faults. This is particularly interesting for complex systems where it is difficult to model the system and identify the informative features in the dataset.
+\item \textbf{Model-based} approaches use a priori explicit model of the system to identify faults. The models are a set of analytical equations or logical formulas. When an irregularity is identified between what is observed and the theoretical model a fault is presumed. The main drawback of these approaches is the work needed in constructing the theoretical model. This is even more challenging in the robotic field where it needs to take into account the dynamic environment in which the system evolves. 
+\item \textbf{Knowledge-based} approaches are similar to the way a human would perform fault detection. A fault is quickly associated with its cause. Faults are typically represented in a tree structure where the fault can be linked backwards to where it originated. It is particularly useful for fault isolation. Other knowledge-based approaches use IF-THEN structures like a human would to identify a fault and its origin. Again, the main drawback of these approaches is the need of a priori model of the system and its inefficiency in detecting faults in dynamic environments.
+\end{itemize}
+
+
+%Outlier detection
+Outlier detection methodologies have been widely used for identifying anomalies that could be the result of a fault. A definition of “outlier” was proposed by Grubbs (Grubbs, 1969): 
+
+\begin{center}
+\textit{An outlying observation, or outlier, is one that appears to deviate
+markedly from other members of the sample in which it occurs.}
+\end{center} 
+
+From this definition, we can understand that outlier detection is used for classifying data as normal or abnormal. Applying outlier detection to fault detection is to suppose that the abnormality observed is the result of a fault. Outlier detection is part of the data-driven family of the fault detection approaches.  Indeed, as we have discussed, driven approaches compute the deviation of the data and classify it as normal/abnormal depending on the extent of this deviation. From \cite{hodge2004survey}, outlier detection can be divided into 3 types: 
+
+\begin{itemize}
+    \item \textbf{Unsupervised clustering:} The outlier detection doesn’t need any prior knowledge of the data. Using the distribution of the data, the most isolated points are classified as outliers. As a result, you need to have a sufficient amount of data to start detecting outliers. Also, it requires for the data to be static, meaning that the data used for plotting the distribution should have the same value. This necessity is common for all three types of outlier detection.
+    \item \textbf{Supervised classification:} The outlier detection needs a prior knowledge of normality and abnormality. Using pre-labelled normal/abnormal data, new incoming data can be classified in either of these classes based on its distance. It is also possible to have more that 2 classes. For example, you can have one normal class and two abnormal classes, with each one corresponding to a different fault. 
+    \item \textbf{Semi-supervised recognition:} The outlier detection needs prior knowledge of normality. Using pre-labelled normal data, new incoming data can be classified as normal or abnormal. It resembles type 2 outlier detection but without the need of labelled abnormal data. This is an advantage because getting abnormal data for labelling can be difficult. However, you can’t have multiple abnormal classes. This can be a challenge in the fault detection field where knowing the type of fault is of great interest for launching an adequate recovery procedure.
+\end{itemize}
+
+
+%Endogenous vs Exogenous
+Additionally, two strategies can be used for fault detection: endogenous fault detection and exogenous fault detection \cite{christensen2008fault, lau2012error, Miller2021modern}. Endogenous fault detection refers to the actions taken by an individual to perform fault detection on itself and on its own. While this approach is well suited for single robots, in the context of multi-robot systems, opting for this approach does not take advantage of the multiple entities close to one another forming the swarm. On the other hand, exogenous fault detection refers to the actions taken by neighbour robots on a central entity. This approach relies on the observations of multiple robots and is, as a result, better suited for swarm robotics. Exogenous data-driven fault detection methods are the best-suited for robot swarms. Exogenous strategies leverage the power of swarms: collaboration of all team members. Data-driven methods allows the detection of previously unseen faults and, as a result, enables the deployment of the swarm in unknown and dynamic environments.
+
+
+%Immune system
+A fault detection method inspired by the human immune system has been proposed in \cite{ tarapore2015err, tarapore2017generic}. The method uses the mathematical formulation of the cross-regulation model to distinguish between normal and abnormal behavior in a swarm of robots. Abnormality hints a fault, the abnormality being the result of the fault. The fault detection method is divided into three main phases: (i) observing the behaviors of the agents; (ii) based on the observed behaviors, perform anomaly detection using the cross-regulation model; (iii) voting to decide if the agent’s behavior is normal or abnormal.  The first phase of the method (i) uses feature vectors to characterize the behavior of an agent. The feature vector contains six features (F1, F2, F3, F4, F5, F6) with each indicating the presence (Fi=1) or absence (Fi=0) of a particular behavior. Then, the method uses these informative binary feature vectors for running the cross-regulation model. In this fault detection method, if at the end of the cross-regulation cycle, the APC (feature vector) is considered a foreign pathogen, an abnormality is inferred. Finally, in the last phase of the methods (iii) the agents consolidate their individual decisions and vote on the normal/faulty behavior of the neighboring agents. An agent that receives more than five “foreign pathogen” votes is considered faulty. The method was tested on a swarm of seven physical robots and the results showed that method was able to reliably identify the faults injected in the system \cite{tarapore2019fault}. The efficiency of method surpassed the ones of other traditional outlier detection methods K-Nearest Neighbor (KNN) and Local Outlier Factor (LOF). However, for both KNN and LOF the same binary feature vectors were used but these methods could be more effective using non-binary feature vectors. The advantage of this method is that it doesn’t require any prior knowledge of the fault to identify it. Indeed, being an outlier detection method, the presence of faults is only inferred on the presence of an abnormal behavior. This is particularly important in swarm of robots where it’s is very difficult to know in advance the potential fault that the system will encounter. It is also easier to implement. However, because the method identifies anomalies and not faults, it is very hard to perform diagnosis and recovery procedures. It is hard to know what to do when you don’t know what the problem is. \cite{okeefe2018adaptive} tackles this problem by adding a fault diagnosis layer after the fault detection one. 
+
+%Local Outlier factor 
+The Local Outlier Factor (LOF) \cite{breunig2000lof} is a measure of how much a data point can be considered an outlier. The LOF represents the density of a point compared to the density of its neighbors. A LOF around 1 means that the point is not an outlier. A LOF much higher than 1 indicates that the density of the data point is smaller the densities of the neighboring points. The data point is isolated and is, as a result, most likely to be an outlier. In summary, the higher the LOF, the most likely the data point is an outlier. 
+
+%Neural network fault detection
+A neural network fault detection approach was proposed in \cite{christensen2008faultDetection}. They suppose that the occurrence of a fault in the robotic system changes the flow of data. By monitoring the data, they can infer the presence of a fault in the system. Again, this falls into the anomaly detection category and more specifically under the data-driven approaches. They use sensor data and labelled normal/faulty data to classify the operation as being faulty or not. In each control cycle, sensor data is given as an input to the neural network (function) which outputs the state of the system {0 or 1}, where 0 correspond to not faulty and 1 to faulty. 
+
+%Deep learning anomaly detection
+In recent years, deep learning anomaly detection methods have been developed and have shown to generally outperform the traditional anomaly detection methods \cite{pang2021deep}. They are especially effective when working with complex data where traditional methods tend to struggle. 
+
+

@@ -1,0 +1,555 @@
+%% Pour changer les IEEEtran.bst controls, les usagers doivent créer une entrée “IEEEtranBSTCTL” %% dans leur fichier .bib :
+%% @IEEEtranBSTCTL{References:BSTcontrol,      
+%% CTLuse_forced_etal= "yes",    Pour faire apparaître et al. pour 3 auteurs et plus.
+%% CTLmax_names_forced_etal = "2",
+%% CTLnames_show_etal= "1",
+%% CTLuse_alt_spacing= "no",     Pour ne pas utiliser l'espacement entre mots pour les 
+%% références avec URL.
+%% CTLalt_stretch_factor= "1"     Le facteur d'étirement entre mots.
+%% }    
+
+
+%% To change the IEEEtran.bst controls, users should create an IEEEtranBSTCTL entry 
+%% in their .bib file:
+%% @IEEEtranBSTCTL{References:BSTcontrol,      
+%% CTLuse_forced_etal= "yes",      To display et al. for 3 and more authors.
+%% CTLmax_names_forced_etal = "2",
+%% CTLnames_show_etal= "1",
+%% CTLuse_alt_spacing= "no",     ''Shuts off the alternate interword spacing 
+%% for entries with URLs''.
+%% CTLalt_stretch_factor= "1"      ''If alternate interword spacing for entries with URLs is 
+%% enabled, this is the interword spacing stretch factor that will be used.''
+%% } 
+
+@IEEEtranBSTCTL{IEEEexample:BSTcontrol,
+CTLuse_forced_etal       = "yes",
+CTLmax_names_forced_etal = "3",
+CTLnames_show_etal       = "1" 
+}
+
+%% Même si pour le moment le champ doi n'est pas supporté par le style IEEEtran, il y sera 
+%% probablement intégré dans le futur. Si votre document a un doi, ajoutez-le.
+%% Dans les exemples en bas, le champ doi a été ajouté pour tous les documents qui en ont un.
+
+%% The DOI is not supported yet by the IEEEtran style, but it will probably be in the future.  
+%% If your document has a DOI, include it in the reference. 
+%% In the examples below, the DOI field was added in all the references that have a DOI.
+
+%% Livre imprimé, 7e édition / Printed book, 7th edition
+
+@book{Brydson1999,
+author = {Brydson, J. A.},
+title = {Plastics materials},
+year = {1999},
+publisher = {Butterworth-Heinemann},
+address = {Oxford, UK},
+edition = {Seventh}
+}
+
+
+%% Livre imprimé
+%% Printed book
+
+@book{Boyce2002,
+author = {Boyce, William E. and DiPrima, Richard Clyde},
+title = {Équations différentielles},
+year = {2002},
+publisher = {Chenelière},
+address = {Montréal, QC}
+}
+
+
+
+%% Livre imprimé avec éditeur intellectuel, 2e édition
+%% Edited printed book, 2nd edition
+
+@book{Fraas2010,
+editor = {Fraas, Lewis M. and Partain, Larry D.},
+title = {Solar Cells and Their Applications},
+year = {2010},
+publisher = {Wiley},
+address = {Hoboken, NJ},
+edition = {Second}
+}
+
+
+
+%% Livre électronique
+%% Electronic book
+
+@book{Manasreh2011,
+author = {Manasreh, Omar},
+title = {Introduction to Nanomaterials and Devices},
+year = {2011},
+publisher = {Wiley},
+address = {Hoboken, NJ},
+doi = {10.1002/9781118148419},
+url = {http://onlinelibrary.wiley.com/book/10.1002/9781118148419}
+}
+
+
+
+%% Livre électronique avec éditeur intellectuel, 3e édition
+%% Edited electronic book, 3rd edition
+
+@book{Chen2009,
+editor = {Chen, Wai-Kai},
+title = {Analog and {VLSI} Circuits: The Circuits and Filters Handbook},
+year = {2009},
+publisher = {{CRC} Press},
+address = {Boca Raton, FL},
+edition = {Third},
+url = {http://www.crcnetbase.com/doi/book/10.1201/9781420058925}
+}
+
+
+
+%% Section sans titre d'un livre électronique (des pages dans un livre)
+%% Section without title of an electronic book (some pages in a book)
+
+@inbook{Kizza2013,
+author = {Kizza, Joseph Migga},
+title = {Guide to Computer Network Security},
+year = {2013},
+publisher = {Springer},
+address = {London, UK},
+edition = {Second},
+pages = {119-120},
+doi = {10.1007/978-1-4471-4543-1},
+url = {http://dx.doi.org/10.1007/978-1-4471-4543-1}
+}
+
+
+
+%% Chapitre de livre électronique avec éditeur intellectuel
+%% Chapter in an edited electronic book
+
+@incollection{Haist2014,
+author = {Haist, Tobias and Hasler, Malte and Osten, Wolfang and Baranek, Michal},
+title = {Programmable microscopy},
+booktitle = {Multi-dimensional Imaging},
+editor = {Javidi, Bahram and Tajahuerce, Enrique and Andrés, Pedro},
+year = {2014},
+publisher = {{IEEE} Press-Wiley},
+address = {Chichester, UK},
+pages = {153-173},
+doi = {10.1002/9781118705766},
+url = {http://ieeexplore.ieee.org/xpl/bkabstractplus.jsp?bkn=6798070}
+}
+
+
+
+%% Entrée dans une encyclopédie
+%% Entry in an encyclopedia
+
+@incollection{Daintith2010,
+author = {Daintith, John and Martin, Elizabeth},
+title = {Lanthanoids},
+booktitle = {A Dictionary of Science},
+year = {2010},
+publisher = {Oxford University Press},
+address = {Oxford, UK},
+edition = {Sixth},
+pages = {460},
+url = {http://www.knovel.com/ web/portal/browse/display?_EXT_KNOVEL_DISPLAY_bookid=3287}
+}
+
+
+
+%% Entrée dans Wikipédia avec date de mise à jour
+%% Entry in Wikipedia with last update date
+
+@incollection{Corrosion2015,
+title = {Corrosion},
+booktitle = {Wikipédia},     	
+year = {2015},
+month = {14 aug.},          	
+url = {http://fr.wikipedia.org/wiki/Corrosion}    		
+}
+
+%% For the previous reference in English, use:
+%% title = {Corrosion},
+%% booktitle = {Wikipedia},
+%% month = {Aug. 14,},
+%% url = {https://en.wikipedia.org/wiki/Corrosion}
+
+
+
+
+%% Article de revue publié (imprimé)
+%% Published journal article (in print)
+
+%% Le style IEEE utilise les titres de revue abrégés. Dans le champ journal, saisir l'abréviation du titre de la revue (ou le titre complet, ce qui serait aussi acceptable).
+%% The IEEE style uses the abbreviated titles of journals. In the journal field, use the abbreviated title of journal (or its full title, which is also acceptable).
+
+@article{Kaliouby1987,
+title = {New two-port scattering matrix measurement technique using a sliding load},
+author = {Kaliouby, Leopoldine and Bosisio, Renato G.},
+journal = {{IEEE} Transactions on Instrumentation and Measurement},
+year = {1987},
+volume = {IM-36},
+number = {4},
+pages = {1028-1030},
+month = dec
+}
+
+
+
+%% Article de revue publié (électronique)
+%% Published journal article (in electronic format)
+
+%% Le style IEEE utilise les titres de revue abrégés. Dans le champ journal, saisir l'abréviation du titre de la revue (ou le titre complet, ce qui serait aussi acceptable).
+%% The IEEE style uses the abbreviated titles of journals. In the journal field, use the abbreviated title of journal (or its full title, which is also acceptable).
+
+@article{Senjian2015,
+author = {Senjian, An and Boussaid, Farid and Bennamoun, Mohammed and Sohel, Ferdous},
+title = {Quantitative error analysis of bilateral filtering},
+journal = {{IEEE} Signal Processing Letters},		
+year = {2015},
+volume = {22},
+number = {2},
+pages = {202-206},
+month = sep,
+doi = {10.1109/LSP.2014.2353694},
+url = {http://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=6892949}
+}
+
+%% Pour pouvoir utiliser IEEEabrv et IEEEfull, dans la référence précédente, 
+%% le champ journal doit être :
+%% To use IEEEabrv and IEEEfull, in the previous reference, the journal field should be:
+%% journal = IEEE_J_SPL,	
+
+
+
+%% Article accepté pour publication et déjà disponible en ligne
+%% Journal article to be published, already available online
+
+%% Le style IEEE utilise les titres de revue abrégés. Dans le champ journal, saisir l'abréviation du titre de la revue (ou le titre complet, ce qui serait aussi acceptable).
+%% The IEEE style uses the abbreviated titles of journals. In the journal field, use the abbreviated title of journal (or its full title, which is also acceptable).
+
+@article{Choy2016,
+author = {Choy, Wallace C. H. and Ren, Xingang},
+title = {Plasmon-electrical effects on organic solar cells by incorporation of metal nanostructures},
+journal = {{IEEE} Journal of Selected Topics in Quantum Electronics},
+year = {2016},
+volume = {22},
+number = {1},
+pages = {1-9},
+month = jan,
+url = {http://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=7119560},
+note = {à paraître}		
+}
+
+%% For the previous reference in English, use:
+%% note = {to be published}	
+
+
+
+%% Article soumis qui n’est pas encore accepté
+%% Submitted article that was not yet accepted
+
+%% Le style IEEE utilise les titres de revue abrégés. Dans le champ journal, saisir l'abréviation du titre de la revue (ou le titre complet, ce qui serait aussi acceptable).
+%% The IEEE style uses the abbreviated titles of journals. In the journal field, use the abbreviated title of journal (or its full title, which is also acceptable).
+
+@article{Choy2015,
+author = {Choy, Wallace C. H. and Ren, Xingang},
+title = {Plasmon-electrical effects on organic solar cells by incorporation of metal nanostructures},
+journal = {{IEEE} Journal of Selected Topics in Quantum Electronics},
+year = {2015},
+month = sept,
+note = {soumis pour publication}
+}
+
+%% For the previous reference in English, use:
+%% note = {submitted for publication}
+
+
+
+%% Article soumis qui n’est pas encore accepté
+%% Submitted article that was not yet accepted
+
+@unpublished{Choy2015a,
+author = {Choy, Wallace C. H. and Ren, Xingang},
+title = {Plasmon-electrical effects on organic solar cells by incorporation of metal nanostructures},
+year = {2015},
+note = {soumis pour publication}
+}
+
+%% For the previous reference in English, use:
+%% note = {submitted for publication}
+
+
+
+%% Numéro d’une revue académique (électronique)
+%% Journal issue (in electronic format)
+
+%% Le style IEEE utilise les titres de revue abrégés. Dans le champ title, saisir l'abréviation du titre de la revue (ou le titre complet, ce qui serait aussi acceptable).
+%% The IEEE style uses the abbreviated titles of journals. In the title field, use the abbreviated title of journal (or its full title, which is also acceptable).
+
+@periodical{IEEE2012,
+title = {{IEEE} Transactions on Antennas and Propagation"},
+year = {2012},
+volume = {60},
+number = {4},
+month = apr,
+url = {http://ieeexplore.ieee.org/xpl/tocresult.jsp?isnumber=6178353&punumber=8}
+}
+
+
+
+%% Article de périodique électronique
+%% Periodical article available online
+
+@article{Gervais2013,
+title = {Plagiat: Quel vilain mot!},
+author = {Gervais, Martine},
+journal = {Plan},
+year = {2013},
+volume = {L},
+number = {2},
+pages = {46-47},
+month = mar,
+url = {http://www.oiq.qc.ca/Documents/DCAP/chroniques_PLAN/ethique_deontologie/2013_ethique_deontologie/2013_eth_deonto_PLAN_03_FR.pdf}
+}
+
+
+
+%% Article de périodique électronique, sans auteur mentionné
+%% Periodical article without author, available online
+
+@misc{Ledevoir2013,
+howpublished = {Le Devoir},
+title = {Des satellites canadiens s'élancent de l'{I}nde},
+year = {2013},
+month = feb,
+day={25},
+url = {http://www.ledevoir.com/societe/science-et-technologie/371795/des-satellites-canadiens-s-elancent-de-l-inde}
+}
+
+
+
+%% Communication de conférence électronique
+%% Le style IEEE utilise les noms de conférences abrégés. Dans le champ booktitle, saisir l'abréviation du nom de conférence (ou le nom complet, ce qui serait aussi acceptable).
+%% Conference paper in electronic format
+%% The IEEE style uses the abbreviated conference names. In the booktitle field, use the abbreviated name of conference (or its full name, which is also acceptable).
+
+@inproceedings{Madani2010,
+author = {Madani, Nioosha and Guerrouj, Latifa and Di Penta, Massimiliano and Guéhéneuc, Yann-Gaël and Antoniol, Giuliano},
+title = {Recognizing words from source code identifiers using speech recognition techniques},
+booktitle = {14th European Conference on Software Maintenance and Reengineering ({CSMR})},
+year = {2010},
+address = {Madrid, Spain},
+month = {15-18 mars},		
+intype = {communication présentée à},		
+pages = {68-77},
+doi = {10.1109/CSMR.2010.31},
+url = {http://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=5714421}
+}
+
+%% For the previous reference in English, use:
+%% month = {Mar. 15-18,},
+%% intype = {presented at the},
+
+
+
+%% Mémoire de maîtrise électronique
+%% Master's thesis in electronic format
+
+@mastersthesis{Massicotte2013,
+author = {Massicotte, Geneviève},
+title = {Biocapteur ampérométrique intégré pour une unité de détection dédiée aux neurotransmetteurs},
+school = {Dép. de génie électrique, École Polytechnique de Montréal}, 
+year = {2013},
+address = {Montréal, QC},
+type = {mémoire de maîtrise},		
+url = {http://publications.polymtl.ca/1319/}
+}
+
+%% For the previous reference in English, use:
+%% type = {Master's thesis},
+
+
+
+%% Thèse de doctorat électronique
+%% PhD dissertation in electronic format
+
+@phdthesis{Rossi2011,
+author = {Rossi, Angelo},
+title = {Sécurité dans les réseaux mobiles de nouvelle génération},
+school = {Dép. de génie informatique et génie logiciel, École Polytechnique de Montréal},
+year = {2011},
+address = {Montréal, QC},
+type = {thèse de doctorat},		
+url = {http://publications.polymtl.ca/614/}
+}
+
+%% For the previous reference in English, use:
+%% type = {PhD dissertation},
+
+
+
+%% Raport technique imprimé
+%% Technical report (in print)
+
+@techreport{DeSantis2002,
+author = {De Santis, Romano Mario},
+title = {Enhanced tuning of industrial controllers via a dual loop {pid} form},
+institution = {Dép. de genie électrique, École Polytechnique de Montréal},
+year = {2002},
+address = {Montréal, QC},
+number = {EPM/RT 01-06},
+type = {Rapport technique}		
+}
+ 
+%% For the previous reference in English, use:
+%% type = {Technical report}
+ 
+ 
+  
+%% Raport technique électronique
+%% Technical report (in electronic format)
+
+@techreport{Cohen2006,
+author = {Cohen, Amit and Thorne, David},
+title = {Migration to {E}thernet-based {DSL} aggregation},
+institution = {Architecture and Transport Working Group},
+year = {2006},
+number = {DSL Forum TR-101},
+url = {https://www.broadband-forum.org/technical/download/TR-101.pdf}
+}
+
+
+
+%% Brevet canadien imprimé ou électronique
+%% Canadian patent (in print or electronic format)
+
+@patent{Thorsson2014,
+author = {Thorsson, Brynjolfur and Thorvaldsson, Bjorn and Asgeirsson, Asgeir}, 
+title = {Tracing items through a non-sequential process},
+number = {CA 2 634 408},		
+year = {2014},
+month = {13 mai},			
+yearfiled = {2006},
+url = {http://brevets-patents.ic.gc.ca/opic-cipo/cpd/eng/patent/2634408/summary.html},
+howpublished = {Canadian Intellectual Property Office}
+}
+
+%% For the previous reference in English, use:
+%% nationality = {Canadian},	
+%% number = {2 634 408},	
+%% month = {May 13},	
+
+
+
+%% Brevet américain imprimé ou électronique
+%% American patent (in print or electronic format)
+
+@patent{Schirmer2012,
+author = {Schirmer, Andreas and Rude, Mathew and Brubaker, Shane},
+title = {Method for producing a fatty alcohol or fatty aldehyde},	
+number = {U.S. 8 268 599 B2},	
+year = {2012},
+month = {18 sept.},			
+url = {http://www.google.com/patents/US8268599?dq=8,268,599&hl=fr&sa=X&ei=uI_UUJGGEMXNrQGR0oDADw&ved=0CDsQ6AEwAA}
+}
+
+%% For the previous reference in English, use:
+%% nationality = {U.S.},	
+%% number = {8 268 599 B2},
+%% year = {2012},
+%% month = {Sept. 18},	
+
+
+
+%% Demande de brevet américain
+%% American patent application (in print or electronic format)
+
+@patent{Sakai2015,
+author = {Sakai, Takashi and Kosaka, Shunsuke and Kunisaki, Akira},
+title = {Industrial robot},
+number = {U.S. 2015/0246449 A1},		
+year = {2015},
+month = {3 sept.},			
+type = {Demande de brevet},	
+url = {http://appft.uspto.gov/netacgi/nph-Parser?TERM1=20150246449&Sect1=PTO1&Sect2=HITOFF&d=PG01&p=1&u=\%2Fnetahtml\%2FPTO\%2Fsrchnum.html&r=0&f=S&l=50}
+}
+
+%% Utiliser \& au lieu de & si le lien se transforme en commentaire.
+
+%% For the previous reference in English, use:
+%% nationality = {U.S.},
+%% number = {2015/0246449 A1},
+%% month = {Sept. 3},
+%% type = {Patent appl.},
+
+%% Change & with \& if the link changes in comment.
+ 
+ 
+ 
+%% Norme imprimée
+%% Standard in print
+
+@standard{CSA2002,
+title = {L'ISO 14001 et l'état de la conformité au {C}anada},	
+number = {CSA PLUS 1162},
+address = {Toronto, ON},
+year = {2002}
+}
+
+%% For the previous reference in English, use:
+%% title = {ISO 14001 and Compliance in {C}anada},	
+
+
+
+%% Norme électronique
+%% Standard in electronic format
+
+@standard{Electrical2006,
+title = {{IEEE} Recommended Practice for Powering and Grounding Electronic Equipment},
+number = {1100-2005},
+year = {2006},
+address = {Piscataway, NJ},
+doi = {10.1109/IEEESTD.2006.216391},
+url = {http://ieeexplore.ieee.org/servlet/opac?punumber=10911}
+}
+
+
+
+%% Page Web
+%% Web page
+
+@electronic{Min2016,
+author = {{Ministère du Développement durable, Environnement et Lutte contre les changements climatiques}},
+title = {Les gaz à effet de serre},
+year = {2016},
+url = {http://www.mddelcc.gouv.qc.ca/air/questce-ges.htm}
+}
+
+%% Utiliser {} si l'auteur est une organisation.
+%% Use {} if the author is an organisation.
+
+
+%% Logiciel
+%% Software
+
+@electronic{Druide2012,
+author = {{Druide informatique}},
+title = {Antidote {RX} (Version 8)},
+year = {2012},
+url = {http://www.druide.com/antidote.html}
+} 
+
+
+%% Communication personnelle
+%% Personal communication
+
+@misc{Com2018,
+author = {Desjardins, Laurent},
+year = {2018},
+month = {13 mai},	
+note = {communication personnelle}		
+}
+
+%% For the previous reference in English, use:
+%% month = {May 13,},	
+%% note = {private communication}
