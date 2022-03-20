@@ -4,15 +4,127 @@
 
 \section{Swarm Robotics}
 
+
 \section{Swarm programming}
 
+%DRONA
+Drona \cite{desai2017drona} is a state-machine based language providing decentralized motion planing for mobile drones. It can be run on the Robot Operating System (ROS) and offers real-time collision-free planning even with not perfectly synchronized clocks between robots. However, Drona does not consider heterogeneous robot swarms.
+
+%Koord
+Koord \cite{ghosh2020koord}, a new programming language for distributed robotic applications draws considerable attention to verification and validation of the distributed algorithm. Koord provides abstraction from the physical robot and enables easy verification of the code. Being modular and hardware-independent, each part of the algorithm can be easily tested and validated.
+
+%BUZZ
+A programming language, specifically designed for large-scale robot swarms, has been proposed in \cite{pinciroliBuzz2016}. Buzz is an extensible programming language for Heterogeneous robot swarms offering means of easily defining swarm behaviours both from a bottom-up and top-down perspective. Of course, Buzz respects the design principles of swarm robotic systems and self-organization is assured by the fully distributed run-time platform of the language. In addition to be an accessible swarm robotics programming tool, Buzz contains a large variety of the most common swarm behaviors, such as flocking, shape formation, barriers and so on. It therefore enables fast prototyping and reduces the need of re-coding these common swarm behaviors. The swarm-oriented programming language is also integrated to ROS \cite{st2017ros}.
+
+%ARGOS
+ARGoS \cite{Pinciroli:SI2012} is a physics-based multi-robot simulator designed for large scale experiments of heterogeneous swarms. ARGoS is time efficient thanks to its capability of running robots on separate threads. Experimental results demonstrate that simulation run-time increases linearly with the number of robots. The simulator is highly customizable where the simulated environment can be divided into sub-spaces with different physics engines. Moreover, Buzz and ARGoS can work together particularly well. Swarm behaviors implemented using the Buzz programming language can be easily tested in the ARGoS simulator, even with large robot swarms. Because of the physics incorporated in the simulator, the behaviors displayed in the ARGoS usually translate well to real-world scenarios. The combination of Buzz and ARGoS provides an accessible and fast swarm robotics development tool. 
+
+
+
+
+
+
 \section{Information sharing}
+Distributed sensing and information sharing is not trivial, especially considering
+the challenges of consistency and partial connectivity among the
+robotic teams~\cite{amigoni2017multirobot,otte2018emergent}. The virtual stigmergy
+presented in \cite{pinciroliTuple2016} and implemented in the Buzz
+programming language \cite{pinciroliBuzz2016} achieves consensus among
+a group of robots using Conflict-free Replicated Data Types (CRDTs),
+represented as key-value pairs shared and replicated among the swarm members. This sort of shared data structure is
+particularly relevant for belief maps, since it is easy to assign a
+unique key to each cell based on its location.  In the virtual
+stigmergy, data is shared on writing and reading the CRDT, with the
+additional updates on read improving the robustness to temporary
+disconnections and message drops. This solution differs from
+distributed hash tables, which require a complete view of the system
+at every point in time. Essentially, information updates are propagated throughout the swarm using the stigmergy whenever it is possible. In this sense, it offers high availability while settling for eventual data consistency. Other distributed data storage approaches such
+as SwarmMesh \cite{majcherczykSwarmmesh2020} store data in different
+locations based on a fitness function instead of replicating them on
+all robots. This allows the storage of more data with less
+communication, but robots are less likely to have access to the latest
+values.
+
+Belief maps are a simple yet powerful tool for robotic exploration
+because they can represent an environment with a 2D cell grid. They
+are a generalization of occupancy maps: instead of storing only one
+bit per cell to indicate the presence of an obstacle/danger, they
+store obstacle/danger likelihoods and offer significant improvements
+for exploration \cite{stachnissMappingExplorationMobile2003}. In the
+field of multi-robot exploration, early techniques leveraging belief
+maps date back as far as twenty years
+\cite{kobayashiSharingExploringInformation2002,kobayashiDeterminationExplorationTarget2003},
+but they rely on a fixed grid size and are tested only with two
+robots. More recent works also leverage belief maps for multi-robot
+exploration. For example,
+in~\cite{indelmanCooperativeMultirobotBelief2018}, the robots consider
+both the current beliefs and the expected beliefs from future
+observations to coordinate their exploration. Grid maps and belief
+maps are also widely used to train deep reinforcement learning
+exploration policies
+\cite{hanGridWiseControlMultiAgent,panovGridPathPlanning2018}, but they often rely on a trial and error process which may select actions leading to failures \cite{garciaSafeExplorationState2012,andersenSafeReinforcementlearningIndustrial2020}.
+
+Situational awareness \cite{jones2020distributed}
+%Expliquer Davantage ....
 
 \section{Routing}
 
+
 \section{Swarm exploration strategies}
+Many distributed exploration strategies maximizing the amount of
+covered terrain have been proposed. The first approaches to stand out
+in this regard are Voronoi-based coverage control
+techniques~\cite{luo2019voronoi,santos2019decentralized}.
+
+A second method covers time-varying domains, in which points in the
+covered region can become more or less interesting to explore,
+therefore prompting a change in the coverage function
+\cite{santos2019decentralized,xu2019multi}. 
+
+Another method to optimize
+coverage is Frontier-Based Exploration (FBE)
+\cite{yamauchi1998frontier} of which many variations have been
+developed, such as those based on Particle Swarm Optimization
+\cite{wang2011frontier} or the Wavefront Frontier Detector
+\cite{topiwala2018frontier}. 
+
+However, none of these strategies take
+risk into account. Therefore, the
+exploration strategy implemented in this paper takes inspiration of
+the multi-robot control algorithm presented in
+\cite{dames2012decentralized,schwagerMultirobotControlPolicy2017}
+which maximizes the information gain during exploration in the
+presence of unknown hazards. However, this optimal algorithm has a
+very high computational complexity and could benefit from approximations.
+
+
+
+
+
 
 \section{Risk in swarm robotics}
+The importance of risk has dramatically increased over the last few years. Robotic systems are being used more widely and as a results risk management becomes essential as to not endanger the system itself and the objects and beings in its immediate environment. In \cite{hunt2020checklist}, a checklist for robot swarms to be safe for the public, the environment and for itself is presented. The authors draw attention to the lack of proper systematic swarm safety assessment mechanism and propose a checklist of ten questions that should be answered. They consider that swarm safety is larger than simply analyzing failure modes. Questions related to ethics, legality, accountability, security are also listed and as a results should provide a more thorough consideration of all socio-technical risks robot swarms face. 
+
+In \cite{higgins2009threats}, the security challenges of robots swarms are presented. Security is defined as the state of being protected from risks originating from hostile and malicious intentions. The security of new technologies is usually not included in its design process, typically it is with the rise of the technology that security concerns appear. To prevent any unwanted consequences, the paper presents the security challenges robot swarms will face in an attempt of including this component in the design process of the new technology. However, only security threats are considered and risk, as something not necessarily malicious, is not examined.
+
+Several path planners based on Markov Decision Processes \cite{undurti2010online,thiebaux2016rao,xiao2020robot} take into account risk and have useful definitions of it. In \cite{xiao2020robot}, risk is categorized into three different groups:
+
+\begin{itemize}
+    \item \textbf{Locale-Dependence:} Risk elements not depending on history. The risks associated with this category are usually location-based, in other words, it is the position of the robot in the environment that determines the level of risk. 
+    \item \textbf{Action-Dependence:} Risk elements depending on close history, specifically changes of states. For example, the risk associated with an aggressive turn is tied to the last states of the robot.   
+    \item \textbf{Traverse-Dependence:} Risk elements depending on the entire history of the robot. Risks associated with this category are tied to all the states traversed by the robot. For example, risk associated with low battery levels are included in the category.  
+\end{itemize}
+
+In \cite{hakobyan2019risk}, a risk-aware motion planning and decision making mechanism is presented. They automatically adjust the "conservativeness" of the motion-planner based on the risk a robot faces. The paper uses a conditional value-at-risk method used in finance to to estimate the risk of an investment. They use a safety risk measure from \cite{samuelson2018safety} onto which they apply the conditional value-at-risk method to achieve safe motion planning and control. Unfortunately, risk only includes collisions and does not translate to other types of hazards robots could face. Value at Risk strategies for robot swarms in hazardous environments was also studied in \cite{hunt2021value}. Again, the method of value-at-risk allows to quantify the foreseen loses over a period of time where the environment contains potentially damaging radiation sources. In details, agents of the swarm calculate the value-at-risk at every time step and shares it with their neighbors when their value-at-risk limit is exceeded. The information helps team members avoid dangerous locations of the environment and overall decreases exposure to risk. Some shortcomings of the method include the determination of the value-at-risk limit and the lack of instantaneous responsiveness of the method as it relies on past observations. Overall, the value-at-risk methods show that financial risk management techniques are an interesting avenue for risk-awareness in swarm robotics.
+
+Another interesting idea for risk awareness is proposed in \cite{ono2008efficient,vitus2011feedback}, where a "risk budget" is allocated to their agents, allowing them to optimize a balance between risk and reward to guide robots. However, these systems assume a knowledge of the global state of the environment, which is unavailable when exploring unknown environments. Furthermore, most are only applied to single-robot systems. 
+
+In SPIDER \cite{hunt2020spider}, multiple agents are tasked with chain formation in dangerous environments. They adapt to varying levels of risk to be resilient to significant failures and member losses in order to maximize information gathering. They introduce a level of "boldness" which represent the risk appetite of the agents of the swarm. This risk appetite is modulated by the connectivity of the agent, specifically its frequency of interactions of neighbors. When an agent is well-connected, its risk appetite will grow and as a result should explorer new parts of the environment. On the other hand, an agent that is isolated and far from any other members of the swarm will increasingly display a shy behavior and go back to safer regions of the environment. SPIDER effectively allows a swarm to trade-off the benefits of information gain versus robot failures. However, the problem is only studied for a chain formation scenario and risk is only a measure of how well connected is an agent.  
+
+
+
+
+
 
 \section{Fault detection}
 
