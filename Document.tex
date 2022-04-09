@@ -217,10 +217,10 @@ a été dûment accepté\ifthenelse{\equal{\monDiplome}{M}}{}{e} par le jury d'e
 	\bibliography{Document}
 	\bibliographystyle{IEEEtran-francais}    % Style de la bibliographie. 
 }
-%
-% \ifthenelse{\equal{\AnnexesPresentes}{O}}{
-% 	\appendix%
-% 	\newcommand{\Annexe}[1]{\annexe{#1}\setcounter{figure}{0}\setcounter{table}{0}\setcounter{footnote}{0}}%
-% 	\include{9-Annexes}}
+
+\ifthenelse{\equal{\AnnexesPresentes}{O}}{
+	\appendix
+	\newcommand{\Annexe}[1]{\annexe{#1}\setcounter{figure}{0}\setcounter{table}{0}\setcounter{footnote}{0}}
+	\include{9-Annexes}}
 {}
 \end{document}

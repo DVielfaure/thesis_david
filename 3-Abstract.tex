@@ -1,7 +1,7 @@
 % Abstract
 %
 % Résumé de la recherche écrit en anglais sans être
-% une traduction mot à mot du résumé écrit en français.
+% une traduction mot à mot du résumé écrit en français
 
 \chapter*{ABSTRACT}\thispagestyle{headings}
 \addcontentsline{toc}{compteur}{ABSTRACT}
@@ -24,14 +24,14 @@ failures~\cite{ramachandran2019resilience,wehbe2021probabilistic,winfield2006saf
 robot failures are still undesirable as they can affect team
 performance and should therefore be avoided. Multi-robot systems come with their own sets of constraints and
 challenges: among those, coordination, communication and data storage are the most
-relevant to the exploration problem. In this thesis, two swarm robotics algorithm adressing the aforementioned challenges will be presented:
+relevant to the exploration problem. In this thesis, two swarm robotics algorithms addressing the aforementioned challenges will be presented:
 
 \begin{itemize}
     \item DORA-Explorer: Distributed Online Risk-Aware Explorer
     \item RASS: Risk-Aware Swarm Storage
 \end{itemize}
 
-DORA-Explorer's main contribution is bringing risk-awareness to a swarm exploration strategy. This is particularly relevant as without a proper strategy, the robots
+DORA-Explorer's main contribution is bringing risk awareness to a swarm exploration strategy. This is particularly relevant as without a proper strategy, the robots
 will inevitably explore overlapping parts of the environment, leading
 to little gains in terms of efficiency compared to single-robot
 solutions. While the coordination could be optimally orchestrated from
@@ -49,7 +49,8 @@ collaborates to avoid hazardous locations as well as obstacles. We validate our 
 with multiple radiation sources. We then test it on physical
 robots. Results from the physics-based simulator show that DORA-Explorer reduces considerably the likeliness of robot failures while keeping similar ground coverage performance compared to other solutions proposed in the literature. In addition to the simulations, physical experiments were carried and confirmed the real-world applicability of our algorithm with convincing results. 
 
-As for RASS, its main contribution resides in bringing risk-awareness to a storage and routing swarm algorithm. Data storage remains a challenge for such systems as the amount of collected information only increases with the number of robot. The unreliable connectivity that these systems typically suffer from \cite{amigoni2017multirobot} inhibits sending collected data items directly to external storage. Robots often need to store locally the data items until a path towards permanent storage becomes available. Additionally, because robots usually have limited communication range, the data items collected during the mission may need to be routed through multiple robots before reaching the external storage infrastructure. The multi robot system becomes a temporary storage infrastructure and deciding where to store and send the data items becomes essential. Routing the data items through the shortest path towards the base station may seem natural, however because the environment into which the mission is being carried is usually uncontrolled, environmental hazards can compromise some of the nodes of the system. For example, routing information through a robot located nearby a radiation source might cause data corruptions. Avoiding such nodes of the system can effectively increase the reliability of the system, thus risk should be considered when storing and routing data items. In RASS, a fully decentralized risk-aware storage system is proposed. RASS actively routes data items towards a base station while avoiding dangerous nodes of the system and relies solely on local interaction to determine which nodes are the fittest for storing information. Again, we validate our approach in the physics-based simulator, ARGoS \cite{Pinciroli:SI2012}, and obtain convincing results in terms of reliability and transfer speed. Physical experiments are also presented and show that the algorithm is easily transferable to physical robots and runs the way it is intended to.  
+As for RASS, its main contribution resides in bringing risk awareness to a storage and routing swarm algorithm. Data storage remains a challenge for such systems as the amount of collected information only increases with the number of robots. The unreliable connectivity that these systems typically suffer from \cite{amigoni2017multirobot} inhibits sending collected data items directly to external storage. Robots often need to store locally the data items until a path towards permanent storage becomes available. Additionally, because robots usually have limited communication range, the data items collected during the mission may need to be routed through multiple robots before reaching the external storage infrastructure. The multi-robot system becomes a temporary storage infrastructure and deciding where to store and send the data items become essential. Routing the data items through the shortest path towards the base station may seem natural, however, because the environment into which the mission is carried is usually uncontrolled, environmental hazards can compromise some of the nodes of the system. For example, routing information through a robot located near a radiation source might cause data corruptions. Avoiding such nodes of the system can effectively increase the reliability of the system; thus risk should be considered when storing and routing data items. In RASS, a fully decentralized risk-aware storage system is proposed. RASS actively routes data items towards a base station while avoiding dangerous nodes of the system and relies solely on local interaction to determine which nodes are the fittest for storing information. Again, we validate our approach in the physics-based simulator, ARGoS \cite{Pinciroli:SI2012}, and obtain convincing results in terms of reliability and transfer speed. Physical experiments are also presented and show that the algorithm is easily transferable to physical robots and runs the way it is intended to.
+  
 
 
 \end{otherlanguage}

@@ -1,28 +1,29 @@
-\Chapter{DISCUSSION}\label{sec:discussion}
+\Chapter{GENERAL DISCUSSION}\label{sec:discussion}
 In this chapter, a general discussion regarding the results obtained during the master's degree in regard to the objectives defined in section \ref{sec:objectifs} will be presented. We will highlight the main contributions of the work and its importance in the swarm robotics community. First, a discussion on DORA-Explorer will be held, followed by one on RASS. 
 
 \section{Risk-Aware Exploration}
-As a reminder, the main objective of the research was bringing risk-awareness to swarm algorithms intended for exploration missions of hazardous environments.
+As a reminder, the main objective of the research was bringing risk awareness to swarm algorithms intended for exploration missions of hazardous environments.
 
 Specific to DORA-Explorer, the research objectives were the following:
 
 \begin{enumerate}
-    \item Reduce failure rate compared to other state of the art algorithms;
-    \item Achieve comparable terrain coverage compared to other state of the art algorithms;
+    \item Reduce failure rate compared to other state-of-the-art algorithms;
+    \item Achieve comparable terrain coverage compared to other state-of-the-art algorithms;
     \item Respect swarm robotics design principles from section \ref{sec:designprinciples};
     \item Test real-world applicability with experiments on physical robots;
 \end{enumerate}
 
-The algorithm DORA-Explorer presented in \ref{sec:Theme1} indeed managed to reduce significantly the rate of failures of a swarm exploring an hazardous environment. The results obtained and presented in section \ref{experimentSetup} clearly show that DORA-Explorer exhibit a higher tolerance to faults in the presence of risk when compared with a random walk and FBE algorithms. Additionally, the exploration of DORA-Explorer is considerably higher than the one of the random walk algorithm and is on par with the FBE, a state of the art exploration algorithm. DORA-Explorer respects the design principles of swarm robotics: The algorithm runs is a fully decentralized fashion with no central coordination and without predefined roles. All the robots are initialized equally and they share information through the virtual stigmergy \cite{pinciroliTuple2016}, a mechanism built into the Buzz programming language \cite{pinciroliBuzz2016} and specifically designed for robot swarms. The behaviors of the agents are achieved through local interactions, namely the virtual stigmergy, and doesn't require a high computational platform to be executed. Finally, DORA-Explorer was tested on a swarm on three physical robots which showed its real-world applicability. 
+The algorithm DORA-Explorer \ref{sec:Theme1} indeed managed to reduce significantly the rate of failures of a swarm exploring a hazardous environment. The results obtained and presented in section \ref{experimentSetup} clearly show that DORA-Explorer exhibit a higher tolerance to faults in the presence of risk when compared with a random walk and FBE algorithms. Additionally, the exploration rate of DORA-Explorer is considerably higher than the one of the random walk algorithm and is on par with the FBE, a state-of-the-art exploration algorithm. DORA-Explorer respects the design principles of swarm robotics: The algorithm runs in a fully decentralized fashion with no central coordination and without predefined roles. All the robots are initialized equally and they share information through the virtual stigmergy \cite{pinciroliTuple2016}, a mechanism built into the Buzz programming language \cite{pinciroliBuzz2016} and specifically designed for robot swarms. The behaviors of the agents are achieved through local interactions, namely the virtual stigmergy, and doesn't require a high computational platform to be executed. Finally, DORA-Explorer was tested on a swarm on three physical robots which showed its real-world applicability. 
 
 \section{Risk-Aware storage and routing}
 Specific to DORA-Explorer, the research objectives were the following:
 
 \begin{enumerate}
-    \item Reduce data corruption rate compared to other state of the art algorithms;
-    \item Achieve comparable transfer speed compared to other state of the art algorithms;
+    \item Reduce data corruption rate compared to other state-of-the-art algorithms;
+    \item Achieve comparable transfer speed compared to other state-of-the-art algorithms;
     \item Respect swarm robotics design principles from section \ref{sec:designprinciples};
     \item Test real-world applicability with experiments on physical robots;
 \end{enumerate}
 
-Similarly to DORA-Explorer, RASS met its research objectives by offering a decentralized risk-aware storing and routing algorithm that effectively reduces the likelihood of data corruption in the system. Indeed, when comparing with a standard hop-count based algorithm results show that RASS always outperforms its counterpart in the presence of risk. The higher reliability however comes at the cost of slower transfer speeds, RASS takes in average 54\% more time to send data items for permanent storage. Fortunately, it is possible to tune the importance of transfer speed by increasing the weight of the routing gain $\alpha$ in equation \ref{equation:fitness}, giving flexibility to the operator of the swarm system to decide the desired behavior from RASS. Again, all swarm robotics design principles are respected and experiments were carried on physical robots to validate the real-world applicability of the algorithm. Overall, both DORA-Explorer and RASS were proven to be valuable assets for robot swarms exploring hazardous environments. Of course, more experiments with larger real-world swarm systems will need to be carried to corroborate the results obtained in simulation with greater swarms. 
+Similarly to DORA-Explorer, RASS met its research objectives by offering a decentralized risk-aware storing and routing algorithm that effectively reduces the likelihood of data corruption in the system. Indeed, when compared with a standard hop-count based algorithm results show that RASS always outperforms its counterpart in the presence of risk. However, the higher reliability comes at the cost of slower transfer speeds, RASS takes on average 54\% more time to send data items for permanent storage. Fortunately, it is possible to tune the importance of transfer speed by increasing the weight of the routing gain $\alpha$ in equation \ref{equation:fitness}, giving flexibility to the operator of the swarm system to decide the desired behavior from RASS. Again, all swarm robotics design principles are respected and experiments were carried on physical robots to validate the real-world applicability of the algorithm. Overall, both DORA-Explorer and RASS were proven to be valuable assets for robot swarms exploring hazardous environments. Of course, more experiments with larger real-world swarm systems will need to be carried to corroborate the results obtained in simulation with greater swarms.
+ 
