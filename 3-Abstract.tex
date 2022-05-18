@@ -8,29 +8,25 @@
 
 \begin{otherlanguage}{english}
 The exploration of unknown environments is at the core of numerous
-robotic applications from search-and-rescue operations
-\cite{matos2016multiple} to space
-missions~\cite{fong2005interaction}. The problem has been mostly
-studied in single robot setups, but the ability to perform exploration
+robotic applications from search-and-rescue operations to space
+missions. The problem has been mostly 
+studied in single robot setups, but the ability to perform exploration 
 with teams of robots opens the door to even more ambitious
-applications, because with proper coordination, the time required to
-explore a given environment should decrease proportionally to the
-number of robots~\cite{burgard2005coordinated}. Therefore, multi-robot
+applications. With proper coordination, the time required to
+explore a given environment should decrease as the number of robots increases. Therefore, multi-robot
 exploration is an attractive solution to many time-critical
 applications such as search-and-rescue operations or planetary
 exploration. Moreover, multi-robot teams are usually resilient to some
 amount of robot
-failures~\cite{ramachandran2019resilience,wehbe2021probabilistic,winfield2006safety}. However,
+failures. However,
 robot failures are still undesirable as they can affect team
 performance and should therefore be avoided. Multi-robot systems come with their own sets of constraints and
 challenges: among those, coordination, communication and data storage are the most
 relevant to the exploration problem. In this thesis, two swarm robotics algorithms addressing the aforementioned challenges will be presented:
-
-\begin{itemize}
+\begin{compactitem}
     \item DORA-Explorer: Distributed Online Risk-Aware Explorer
     \item RASS: Risk-Aware Swarm Storage
-\end{itemize}
-
+\end{compactitem}
 DORA-Explorer's main contribution is bringing risk awareness to a swarm exploration strategy. This is particularly relevant as without a proper strategy, the robots
 will inevitably explore overlapping parts of the environment, leading
 to little gains in terms of efficiency compared to single-robot
@@ -44,12 +40,11 @@ robots and communication with their neighbours. To the best of our knowledge, th
 information. Our decentralized exploration algorithm leverages distributed belief maps (DBMs) to maximize coverage and decrease robot failures caused by environmental hazards. To evaluate this system, we test it on the specific problem of
 hazard mapping in a 2D world discretized as a grid, in which a
 multi-robot team simultaneously explores a dangerous environment and
-collaborates to avoid hazardous locations as well as obstacles. We validate our approach in a physics-based simulator, ARGoS
-\cite{Pinciroli:SI2012}, in which we define a grid-based environment
+collaborates to avoid hazardous locations as well as obstacles. We validate our approach in a physics-based simulator, ARGoS, in which we define a grid-based environment
 with multiple radiation sources. We then test it on physical
 robots. Results from the physics-based simulator show that DORA-Explorer reduces considerably the likeliness of robot failures while keeping similar ground coverage performance compared to other solutions proposed in the literature. In addition to the simulations, physical experiments were carried and confirmed the real-world applicability of our algorithm with convincing results. 
 
-As for RASS, its main contribution resides in bringing risk awareness to a storage and routing swarm algorithm. Data storage remains a challenge for such systems as the amount of collected information only increases with the number of robots. The unreliable connectivity that these systems typically suffer from \cite{amigoni2017multirobot} inhibits sending collected data items directly to external storage. Robots often need to store locally the data items until a path towards permanent storage becomes available. Additionally, because robots usually have limited communication range, the data items collected during the mission may need to be routed through multiple robots before reaching the external storage infrastructure. The multi-robot system becomes a temporary storage infrastructure and deciding where to store and send the data items become essential. Routing the data items through the shortest path towards the base station may seem natural, however, because the environment into which the mission is carried is usually uncontrolled, environmental hazards can compromise some of the nodes of the system. For example, routing information through a robot located near a radiation source might cause data corruptions. Avoiding such nodes of the system can effectively increase the reliability of the system; thus risk should be considered when storing and routing data items. In RASS, a fully decentralized risk-aware storage system is proposed. RASS actively routes data items towards a base station while avoiding dangerous nodes of the system and relies solely on local interaction to determine which nodes are the fittest for storing information. Again, we validate our approach in the physics-based simulator, ARGoS \cite{Pinciroli:SI2012}, and obtain convincing results in terms of reliability and transfer speed. Physical experiments are also presented and show that the algorithm is easily transferable to physical robots and runs the way it is intended to.
+As for RASS, its main contribution resides in bringing risk awareness to a storage and routing swarm algorithm. Data storage remains a challenge for such systems as the amount of collected information only increases with the number of robots. The unreliable connectivity that these systems typically suffer from inhibits sending collected data items directly to external storage. Robots often need to store locally the data items until a path towards permanent storage becomes available. Additionally, because robots usually have limited communication range, the data items collected during the mission may need to be routed through multiple robots before reaching the external storage infrastructure. The multi-robot system becomes a temporary storage infrastructure and deciding where to store and send the data items become essential. Routing the data items through the shortest path towards the base station may seem natural, however, because the environment into which the mission is carried is usually uncontrolled, environmental hazards can compromise some of the nodes of the system. For example, routing information through a robot located near a radiation source might cause data corruptions. Avoiding such nodes of the system can effectively increase the reliability of the system; thus risk should be considered when storing and routing data items. In RASS, a fully decentralized risk-aware storage system is proposed. RASS actively routes data items towards a base station while avoiding dangerous nodes of the system and relies solely on local interaction to determine which nodes are the fittest for storing information. Again, we validate our approach in the physics-based simulator ARGoS and obtain convincing results in terms of reliability and transfer speed. Physical experiments are also presented and show that the algorithm is easily transferable to physical robots and runs the way it is intended.
   
 
 

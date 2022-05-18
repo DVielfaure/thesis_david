@@ -594,8 +594,6 @@ the algorithms can scale to large number of robots. We also ran simulations to s
 
 \subsection{Results}
 
-The following results are an average of the 50 simulation runs of each algorithm. 
-
 \begin{figure}[]
     \centering
     \includegraphics[width=1\columnwidth]{images/cell_explored.png}
@@ -611,7 +609,7 @@ The following results are an average of the 50 simulation runs of each algorithm
 \end{figure}
 
 
-Results from Fig. \ref{results:exploration} show that FBE
+The following results are an average of the 50 simulation runs of each algorithm. Results from Fig. \ref{results:exploration} show that FBE
 achieves slightly higher exploration coverage than DORA-Explorer, but this
 gap in performance decreases as the number of robots increases. This
 is an expected result, because DORA-Explorer's main goal is not to achieve
@@ -635,24 +633,42 @@ and the sensed radiation intensity associated with them for one specific run.
 
 \begin{figure}[h]
     \centering
-    \begin{subfigure}{0.49\textwidth}
-        \includegraphics[width=\textwidth]{images/heatmap_random.png}
-        \caption{Random walk}
+    \subfigure[]
+        {\includegraphics[width=0.47\textwidth]{images/heatmap_random.png}
         \label{results:beliefrandom}
-    \end{subfigure}
-    \begin{subfigure}{0.49\textwidth}
-        \includegraphics[width=\textwidth]{images/heatmap_frontier.png}
-        \caption{FBE}
+        }
+    \subfigure[]
+        {\includegraphics[width=0.47\textwidth]{images/heatmap_frontier.png}
         \label{results:belieffrontier}
-    \end{subfigure}
-    \begin{subfigure}{0.49\textwidth}
-        \includegraphics[width=\textwidth]{images/heatmap_dora.png}
-        \caption{DORA-Explorer}
+        }
+    \subfigure[]
+        {\includegraphics[width=0.47\textwidth]{images/heatmap_dora.png}
         \label{results:beliefdora}
-    \end{subfigure}
-    \caption{Radiation belief maps of the 20m x 20m environment for each exploration algorithm of one specific simulation. Blank cells are unvisited areas, red stars are the point radiation sources and grey squares are the randomly generated obstacles.}
+        }
+    \caption{(a) Random walk (b) FBE (c) DORA-Explorer. Radiation belief maps of the 20m x 20m environment for each exploration algorithm of one specific simulation. Blank cells are unvisited areas, red stars are the point radiation sources and grey squares are the randomly generated obstacles.}
     \label{results:belief}
 \end{figure}
+
+% \begin{figure}[h]
+%     \centering
+%     \begin{subfigure}{0.49\textwidth}
+%         \includegraphics[width=\textwidth]{images/heatmap_random.png}
+%         \caption{Random walk}
+%         \label{results:beliefrandom}
+%     \end{subfigure}
+%     \begin{subfigure}{0.49\textwidth}
+%         \includegraphics[width=\textwidth]{images/heatmap_frontier.png}
+%         \caption{FBE}
+%         \label{results:belieffrontier}
+%     \end{subfigure}
+%     \begin{subfigure}{0.49\textwidth}
+%         \includegraphics[width=\textwidth]{images/heatmap_dora.png}
+%         \caption{DORA-Explorer}
+%         \label{results:beliefdora}
+%     \end{subfigure}
+%     \caption{Radiation belief maps of the 20m x 20m environment for each exploration algorithm of one specific simulation. Blank cells are unvisited areas, red stars are the point radiation sources and grey squares are the randomly generated obstacles.}
+%     \label{results:belief}
+% \end{figure}
 
 The random walk covered much fewer cells than DORA-Explorer and FBE, which both covered
 roughly the same areas of the map, with the same sections remaining
@@ -663,8 +679,7 @@ them. In contrast, DORA-Explorer did not explore these cells because it
 \textit{avoided them}. Again, DORA-Explorer achieves very similar coverage than
 FBE but does so with less robot failures. In this particular
 simulation, DORA-Explorer finished with 18 active robots, random walk finished
-with 7, and FBE with none. 
-
+with 7, and FBE with none.
 
 The results from Fig. \ref{results:communicationCosts} show the amount
 of data transferred by individual agents at each time step by both
@@ -682,7 +697,7 @@ packet collision.
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=1\columnwidth]{images/communication.png}
+    \includegraphics[width=0.97\columnwidth]{images/communication.png}
     \caption{Communication costs for DORA-Explorer and FBE}
     \label{results:communicationCosts}
 \end{figure}

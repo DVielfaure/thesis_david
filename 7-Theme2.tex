@@ -1,12 +1,12 @@
 \Chapter{RISK-AWARE ROUTING IN ROBOT SWARMS}\label{sec:Theme2}
 
-In this chapter, the paper \textit{RASS: Risk-Aware Swarm Storage} \cite{arseneault2022rass}, to which I contributed as second author in the course of my master's degree, will be presented. RASS has been heavily inspired by DORA-Explorer and similarly to the latter, brings risk awareness to a robot swarm algorithm. Specifically, RASS makes the following contributions to the field of swarm robotics: A fully decentralized storing and routing algorithm where the decisions made are based solely on local interactions. The absence of central coordination makes it well suited for robot swarm applications where scalability is at the core of the problem.
+In this chapter, the paper \textit{RASS: Risk-Aware Swarm Storage} \cite{arseneault2022rass}, to which I contributed as second author in the course of my master's degree, will be presented. RASS has been heavily inspired by DORA-Explorer and similarly to the latter, brings risk awareness to a robot swarm algorithm. Specifically, RASS makes the following contribution to the field of swarm robotics: A fully decentralized storing and routing algorithm where the decisions made are based solely on local interactions. The absence of central coordination makes it well suited for robot swarm applications where scalability is at the core of the problem.
 
 The figures presented in the chapter are taken from the article \cite{arseneault2022rass} with permission from the authors. 
 
 
 \section{Introduction}
-The exploration of unknown environments has proven to be more effective using teams of robots instead of a single robotic unit \cite{burgard2005coordinated}. Search and rescue scenarios \cite{kantor2003search} or nuclear inspection and cleanup \cite{schwagerMultirobotControlPolicy2017}, where speed is of the essence, are therefore well suited for multi-robot applications. However, data storage remains a challenge for such systems as the amount of collected information only increases with the number of robots. The unreliable connectivity that these systems typically suffer from \cite{amigoni2017multirobot} inhibits sending collected data items directly to external storage. Robots often need to store locally the data items until a path towards permanent storage becomes available. Additionally, because robots usually have limited communication range, the data items collected during the mission may need to be routed through multiple robots before reaching the external storage infrastructure. The multi-robot system becomes a temporary storage infrastructure and deciding where to store and send the data items become essential. Routing the data items through the shortest path towards the base station may seem natural, however, because the environment into which the mission is carried is usually uncontrolled, environmental hazards can compromise some of the nodes of the system. For example, routing information through a robot located near a radiation source might cause data corruptions. Avoiding such nodes of the system can effectively increase the reliability of the system; thus risk should be considered when storing and routing data items. We propose a fully decentralized Risk-Aware Swarm Storage (RASS) system that actively routes data items towards a base station while avoiding dangerous nodes of the system. The algorithm relies solely on local interaction to determine which nodes are the fittest for storing information and works in both static and dynamic topologies.
+The exploration of unknown environments has proven to be more effective using teams of robots instead of a single robotic unit \cite{burgard2005coordinated}. Search and rescue scenarios \cite{kantor2003search} or nuclear inspection and cleanup \cite{schwagerMultirobotControlPolicy2017}, where speed is of the essence, are therefore well suited for multi-robot applications. However, data storage remains a challenge for such systems as the amount of collected information only increases with the number of robots. The unreliable connectivity that these systems typically suffer from \cite{amigoni2017multirobot} inhibits sending collected data items directly to external storage. Robots often need to store locally the data items until a path towards permanent storage becomes available. Additionally, because robots usually have a limited communication range, the data items collected during the mission may need to be routed through multiple robots before reaching the external storage infrastructure. The multi-robot system becomes a temporary storage infrastructure and deciding where to store and send the data items become essential. Routing the data items through the shortest path towards the base station may seem natural, however, because the environment into which the mission is carried is usually uncontrolled, environmental hazards can compromise some of the nodes of the system. For example, routing information through a robot located near a radiation source might cause data corruptions. Avoiding such nodes of the system can effectively increase the reliability of the system; thus risk should be considered when storing and routing data items. We propose a fully decentralized Risk-Aware Swarm Storage (RASS) system that actively routes data items towards a base station while avoiding dangerous nodes of the system. The algorithm relies solely on local interaction to determine which nodes are the fittest for storing information and works in both static and dynamic topologies.
 
 
 \section{System model}
@@ -29,7 +29,7 @@ The total radiation level perceived by a robot $a_i$ at position $\bm{x}_i \in E
     \label{eq:radiationRASS}
 \end{equation}
 
-The radiation level decays exponentially with the Euclidean distance $\rho(\bm{x}_i)$ between the position of the radiation source $\bm{s}_j$ and the one of the robots $\bm{x}_i$. $\lambda$ is used as a decay rate parameter and Gaussian measurement noise
+The radiation level decays exponentially with the Euclidean distance $\rho(\bm{x}_i)$ between the position of the point radiation source $\bm{s}_j$ and the robot $\bm{x}_i$. $\lambda$ is used as a decay rate parameter and Gaussian measurement noise
 $b \sim \mathcal{N}(0, 0.05)$ is added to the readings of the on-board sensor. 
 
 We assume that the radiation sources affect the robots independently and therefore, the probability of data being corrupted follows a Bernoulli distribution and is given by:
@@ -42,7 +42,7 @@ We assume that the radiation sources affect the robots independently and therefo
 
 \subsection{Potential-Based Percolation}
 
-RASS is built upon the assumption that nodes of the system exposed to higher levels of radiation should be used less in storing and routing data items. Indeed, because radiation is assumed to cause data corruptions, avoiding dangerous locations of the system should offer better reliability results and effectively reduce the number of lost data items. Additionally, to alleviate the memory usage of the robots of the system, percolating data items towards a base station for permanent storage should be encouraged. From this, and taking inspiration from \cite{majcherczykSwarmmesh2020}, we define a fitness policy that indicates how "fit" an agent is for storing data items. The fitness of an agent is given by:
+RASS is built upon the assumption that nodes of the system exposed to higher levels of radiation should be used less for storing and routing data items. Indeed, because radiation is assumed to cause data corruptions, avoiding dangerous locations of the system should offer better reliability results and effectively reduce the number of lost data items. Additionally, to alleviate the memory usage of the robots of the system, percolating data items towards a base station for permanent storage should be encouraged. From this, and taking inspiration from \cite{majcherczykSwarmmesh2020}, we define a fitness policy that indicates how "fit" an agent is for storing data items. The fitness of an agent is given by:
 
 \begin{equation}
         \phi_i =
@@ -133,7 +133,7 @@ To thoroughly assess RASS' performance, four different robot topologies were stu
     \label{argos:random-walk}
 \end{figure}
 
-We deploy N = 100 robots with a communication radius $R$ = 3 meters in a 20m x 20m environment containing a set of 3 randomly distributed radiation sources. The base station is located in a corner of the environment and its storage capacity is assumed to be infinite. To bring our simulations closer to real-world scenarios, we added bandwidth limitations to the amount of data robots can possibly exchange. In our simulations, the maximal number of data items that could be exchanged between two neighbouring robots was 10 items every time steps. Data items were generated at a fixed interval by all robots in the system. The storage capacity of robots was set to 50 data items. For our simulations, we used $\alpha = 10$ and $beta = 1$ for Eq. \ref{equation:fitness}. This choice was justified by the fact that the risk $r({x_i})$ was bounded by [0,1] while the hop-count value $h_i$ was not. In our simulations, $h_i$ was usually upper-bounded by 10. Therefore, choosing of value of $\alpha = 10$ gave the two parameters a similar importance when determining the fitness in Eq. \ref{equation:fitness}. Two benchmark algorithms were used to assess RASS' performance:
+We deploy N = 100 robots with a communication radius $R$ = 3 meters in a 20m x 20m environment containing a set of 3 randomly distributed radiation sources. The base station's storage capacity is assumed to be infinite and is located in one of the corners of the environment. To bring our simulations closer to real-world scenarios, we added bandwidth restrictions to the amount of data robots can possibly exchange. In our simulations, the maximal number of data items that could be exchanged between two neighbouring robots was 10 items every time step. Data items were generated at a fixed interval by all robots in the system. The storage capacity of robots was set to 50 data items. For our simulations, we used $\alpha = 10$ and $beta = 1$ for Eq. \ref{equation:fitness}. This choice was justified by the fact that the risk $r({x_i})$ was bounded by [0,1] while the hop-count value $h_i$ was not. In our simulations, $h_i$ was usually upper-bounded by 10. Therefore, choosing of value of $\alpha = 10$ gave the two parameters a similar importance when determining the fitness in Eq. \ref{equation:fitness}. Two benchmark algorithms were used to assess RASS' performance:
 
 \begin{itemize}
     \item A routing algorithm based on hop count 
@@ -142,75 +142,143 @@ We deploy N = 100 robots with a communication radius $R$ = 3 meters in a 20m x 2
 
 The hop-count based algorithm enables comparison with a commonly used routing mechanism meant to yield fast transfer speeds. The virtual stigmergy was chosen to showcase the benefit of percolating data towards a base station.
 
-The results obtained in the simulations for the different topologies are presented in Fig. \ref{results:staticTopology}, \ref{results:staticTopologyScale}, \ref{results:dynamicTopologyLennard} and \ref{results:dynamicTopologyRandom} as well as in table \ref{table:speed}. They show that RASS persistently outperforms the hop-count based algorithm and the virtual stigmergy in terms of reliability across all four topologies. Indeed, the percentage of retained data for RASS is usually between 80\% and 100\%, meaning that no more than 20\% of generated data items during the experiments are lost due to corruption. On the other hand, the hop-count based algorithm offers reliability results ranging from 50\% to 80\% and is therefore more affected by the radiation sources of the environment. Finally, the virtual stigmergy offers low reliability results as the storage capacity of the agents is quickly saturated and new data items cannot be stored any more. In terms of transfer speeds, results show that the fastest routing mechanism is the hop-count based algorithm. In average, RASS is 54.9\% slower than the hop-count based algorithm, in other words, it takes 54.9\% more steps for data items to reach the base station using RASS. This is not surprising as the hop-count based algorithm always takes the fastest route towards the base station, regardless of the risk associated with it. In opposition, RASS takes the route that optimizes both speed and safety. RASS offers better reliability results at the cost of slower transfer speeds.  
+The results obtained in the simulations for the different topologies are presented in Fig. \ref{results:staticTopology}, \ref{results:staticTopologyScale}, \ref{results:dynamicTopologyLennard} and \ref{results:dynamicTopologyRandom} as well as in table \ref{table:speed}. They show that RASS persistently outperforms the hop-count based algorithm and the virtual stigmergy in terms of reliability across all four topologies. Indeed, the percentage of retained data for RASS is usually between 80\% and 100\%, meaning that no more than 20\% of generated data items during the experiments are lost due to corruption. On the other hand, the hop-count based algorithm offers reliability results ranging from 50\% to 80\% and is therefore more affected by the radiation sources of the environment. Finally, the virtual stigmergy offers low reliability results as the storage capacity of the agents is quickly saturated and new data items cannot be stored any more. In terms of transfer speeds, results show that the fastest routing mechanism is the hop-count based algorithm. In average, RASS is 54.9\% slower than the hop-count based algorithm, in other words, it takes 54.9\% more steps for data items to reach the base station using RASS. This is not surprising as the hop-count based algorithm always takes the fastest route to the base station, without considering the risk associated with it. In opposition, RASS takes the route that optimizes both speed and safety. RASS offers better reliability results at the cost of slower transfer speeds.  
 
 \begin{figure*}
     \centering
-    \begin{subfigure}{0.8\textwidth}
-        \includegraphics[width=\textwidth]{images/grid_reliability.png}
-        \caption{Reliability over time}
+    \subfigure[]
+        {
+        \includegraphics[width=0.75\textwidth]{images/grid_reliability.png}
         \label{results:grid_100_reliability}
-    \end{subfigure}
-    \begin{subfigure}{0.8\textwidth}
-        \includegraphics[width=\textwidth]{images/grid_speed.png}
-        \caption{Distribution of transfer speeds}
+        }
+    \subfigure[]
+        {
+        \includegraphics[width=0.75\textwidth]{images/grid_speed.png}
         \label{results:grid_100_speed}
-    \end{subfigure}
-    \caption{Performance comparison of RASS, hop count and stigmergy in a static grid-like topology.}
+        }
+    \caption{(a) Reliability over time (b) Distribution of transfer speeds. Performance comparison of RASS, hop count and stigmergy in a static grid-like topology.}
     \label{results:staticTopology}
     \vspace{-2mm}
 \end{figure*}
 
 \begin{figure*}
     \centering
-    \begin{subfigure}{0.8\textwidth}
-        \includegraphics[width=\textwidth]{images/scale_reliability.png}
-        \caption{Reliability over time}
+    \subfigure[]
+        {
+        \includegraphics[width=0.75\textwidth]{images/scale_reliability.png}
         \label{results:scale_100_reliability}
-    \end{subfigure}
-    \begin{subfigure}{0.8\textwidth}
-        \includegraphics[width=\textwidth]{images/scale_speed.png}
-        \caption{Distribution of transfer speeds}
+        }
+    \subfigure[]
+        {
+        \includegraphics[width=0.75\textwidth]{images/scale_speed.png}
         \label{results:scale_100_speed}
-    \end{subfigure}
-    \caption{Performance comparison of RASS, hop count and stigmergy in a static Scale Free topology.}
+        }
+    \caption{(a) Reliability over time (b) Distribution of transfer speeds. Performance comparison of RASS, hop count and stigmergy in a static Scale Free topology.}
     \label{results:staticTopologyScale}
     \vspace{-2mm}
 \end{figure*}
 
 \begin{figure*}
     \centering
-    \begin{subfigure}{0.8\textwidth}
-        \includegraphics[width=\textwidth]{images/lennard_reliability.png}
-        \caption{Reliability over time}
+    \subfigure[]
+        {
+        \includegraphics[width=0.75\textwidth]{images/lennard_reliability.png}
         \label{results:lennard_100_reliability}
-    \end{subfigure}
-    \begin{subfigure}{0.8\textwidth}
-        \includegraphics[width=\textwidth]{images/lennard_speed.png}
-        \caption{Distribution of transfer speeds}
+        }
+    \subfigure[]
+        {
+        \includegraphics[width=0.75\textwidth]{images/lennard_speed.png}
         \label{results:lennard_100_speed}
-    \end{subfigure}
-    \caption{Performance comparison of RASS, hop count and stigmergy in a dynamic Lennard-Jones topology.}
+        }
+    \caption{(a) Reliability over time (b) Distribution of transfer speeds. Performance comparison of RASS, hop count and stigmergy in a dynamic Lennard-Jones topology.}
     \label{results:dynamicTopologyLennard}
     \vspace{-2mm}
 \end{figure*}
 
 \begin{figure*}
     \centering
-    \begin{subfigure}{0.8\textwidth}
-        \includegraphics[width=\textwidth]{images/random_reliability.png}
-        \caption{Reliability over time}
+    \subfigure[]
+        {
+        \includegraphics[width=0.75\textwidth]{images/random_reliability.png}
         \label{results:random_100_reliability}
-    \end{subfigure}
-    \begin{subfigure}{0.8\textwidth}
-        \includegraphics[width=\textwidth]{images/random_speed.png}
-        \caption{Distribution of transfer speeds}
+        }
+    \subfigure[]
+        {
+        \includegraphics[width=0.75\textwidth]{images/random_speed.png}
         \label{results:random_100_speed}
-    \end{subfigure}
-    \caption{Performance comparison of RASS, hop count and stigmergy in a dynamic random search topology.}
+        }
+    \caption{(a) Reliability over time (b) Distribution of transfer speeds. Performance comparison of RASS, hop count and stigmergy in a dynamic random search topology.}
     \label{results:dynamicTopologyRandom}
     \vspace{-2mm}
 \end{figure*}
+
+% \begin{figure*}
+%     \centering
+%     \begin{subfigure}{0.8\textwidth}
+%         \includegraphics[width=\textwidth]{images/grid_reliability.png}
+%         \caption{Reliability over time}
+%         \label{results:grid_100_reliability}
+%     \end{subfigure}
+%     \begin{subfigure}{0.8\textwidth}
+%         \includegraphics[width=\textwidth]{images/grid_speed.png}
+%         \caption{Distribution of transfer speeds}
+%         \label{results:grid_100_speed}
+%     \end{subfigure}
+%     \caption{Performance comparison of RASS, hop count and stigmergy in a static grid-like topology.}
+%     \label{results:staticTopology}
+%     \vspace{-2mm}
+% \end{figure*}
+
+% \begin{figure*}
+%     \centering
+%     \begin{subfigure}{0.8\textwidth}
+%         \includegraphics[width=\textwidth]{images/scale_reliability.png}
+%         \caption{Reliability over time}
+%         \label{results:scale_100_reliability}
+%     \end{subfigure}
+%     \begin{subfigure}{0.8\textwidth}
+%         \includegraphics[width=\textwidth]{images/scale_speed.png}
+%         \caption{Distribution of transfer speeds}
+%         \label{results:scale_100_speed}
+%     \end{subfigure}
+%     \caption{Performance comparison of RASS, hop count and stigmergy in a static Scale Free topology.}
+%     \label{results:staticTopologyScale}
+%     \vspace{-2mm}
+% \end{figure*}
+
+% \begin{figure*}
+%     \centering
+%     \begin{subfigure}{0.8\textwidth}
+%         \includegraphics[width=\textwidth]{images/lennard_reliability.png}
+%         \caption{Reliability over time}
+%         \label{results:lennard_100_reliability}
+%     \end{subfigure}
+%     \begin{subfigure}{0.8\textwidth}
+%         \includegraphics[width=\textwidth]{images/lennard_speed.png}
+%         \caption{Distribution of transfer speeds}
+%         \label{results:lennard_100_speed}
+%     \end{subfigure}
+%     \caption{Performance comparison of RASS, hop count and stigmergy in a dynamic Lennard-Jones topology.}
+%     \label{results:dynamicTopologyLennard}
+%     \vspace{-2mm}
+% \end{figure*}
+
+% \begin{figure*}
+%     \centering
+%     \begin{subfigure}{0.8\textwidth}
+%         \includegraphics[width=\textwidth]{images/random_reliability.png}
+%         \caption{Reliability over time}
+%         \label{results:random_100_reliability}
+%     \end{subfigure}
+%     \begin{subfigure}{0.8\textwidth}
+%         \includegraphics[width=\textwidth]{images/random_speed.png}
+%         \caption{Distribution of transfer speeds}
+%         \label{results:random_100_speed}
+%     \end{subfigure}
+%     \caption{Performance comparison of RASS, hop count and stigmergy in a dynamic random search topology.}
+%     \label{results:dynamicTopologyRandom}
+%     \vspace{-2mm}
+% \end{figure*}
 
 \begin{table}[]
 \centering
