@@ -1,7 +1,7 @@
 \Chapter{LITERATURE REVIEW}\label{sec:RevLitt}
 The following chapter is an overview of the existing works found in the literature in relation with the research fields covered in the thesis. Attention will be brought to swarm programming languages and tools, information sharing in robot swarms, routing mechanisms, swarm exploration strategies, risk in swarm robotics and finally fault detection methods. 
 
-\section{Swarm programming}
+\section{Swarm Programming}
 Drona \cite{desai2017drona} is a state-machine-based language providing decentralized motion planning for mobile drones. It can be run on the \ac{ROS} \cite{quigley2009ros} and offers real-time collision-free planning even with not perfectly synchronized clocks between robots. This is particularly useful as perfect clock synchronization is hard to achieve, especially in large and dynamic networks \cite{cao2021distributed}. However, Drona does not consider heterogeneous robot swarms.
 
 Koord \cite{ghosh2020koord}, a new programming language for distributed robotic applications draws considerable attention to verification and validation of the distributed algorithm. Koord provides abstraction from the physical robot and enables easy verification of the code. Its modularity and hardware-independence means that each part of the algorithm can be easily tested and validated.
@@ -10,7 +10,7 @@ A programming language, specifically designed for large-scale robot swarms, has 
 
 ARGoS \cite{Pinciroli:SI2012} is a physics-based multi-robot simulator designed for large-scale experiments of heterogeneous swarms. ARGoS is time efficient thanks to its capability of running robots on separate threads. Experimental results demonstrate that simulation run-time increases linearly with the number of robots. The simulator is highly customizable where the simulated environment can be divided into subspaces with different physics engines. Moreover, Buzz and ARGoS can work together particularly well. Swarm behaviors implemented using the Buzz programming language can be easily tested in the ARGoS simulator, even with large robot swarms. Because of the physics incorporated in the simulator, the behaviors displayed in the ARGoS usually translate well to real-world scenarios. The combination of Buzz and ARGoS provides an accessible and fast swarm robotics development tool. 
 
-\section{Information sharing}
+\section{Information Sharing}
 Distributed sensing and information sharing is not trivial, especially considering the challenges of consistency and partial connectivity among the
 robotic team~\cite{amigoni2017multirobot,otte2018emergent}. In social insects, pheromone trails are used to build a shared memory structure in the environment. For example, ants that communicate between each other by laying pheromones on the ground to guide peers towards food \cite{bonabeau1999swarm}. Such distributed memory mechanism is called stigmergy \cite{heylighen2016stigmergy1, heylighen2016stigmergy2} and allows agents to interact with each other without the need for direct communication and centralized control. 
 
@@ -55,7 +55,7 @@ Recently, many routing strategies have been developed for vehicular ad hoc netwo
 Other notable routing mechanisms take inspiration from nature. In \cite{li2011slime,jiang2018toward}, path growth routing protocols based on slime molds are presented. In \cite{jiang2018effective,liao2008data}, ant colony optimization-based routing algorithms are presented. The ant colony optimization algorithm tries to reproduce the behavior of ants in their search of the nearest food sources \cite{dorigo1996ant}. In the process, ants lay pheromones on the ground. Hence, the shorter the path between the nest and the food source, the more frequent it will be traversed by ants, thus increasing the pheromone intensity. Ants then follow paths with high pheromone intensities. In \cite{liao2008data} existing approaches are investigated and a hybrid routing mechanism that combines ant colony optimization and hop count into one routing scheme is proposed. However, these approaches are tailored for static topologies and are ill suited for dynamic robotic networks.
 
 
-\section{Swarm exploration strategies}
+\section{Swarm Exploration Strategies}
 Many distributed exploration strategies maximizing the amount of
 terrain coverage have been proposed. The first approaches to stand out
 in this regard are Voronoi-based coverage control
@@ -91,7 +91,7 @@ very high computational complexity and could benefit from approximations.
 
 
 
-\section{Risk in swarm robotics}
+\section{Risk in Swarm Robotics}
 The importance of risk management has dramatically increased over the last few years. Robotic systems are being used more widely and as a result, risk management becomes essential as to not endanger the system itself and the objects and beings in its immediate environment. The importance of enabling distributed situational awareness in robot swarms is raised in \cite{jones2020distributed}. In \cite{hunt2020checklist}, a checklist for robot swarms to be safe for the public, the environment and for itself is presented. The authors draw attention to the lack of proper systematic swarm safety assessment mechanism and propose a checklist, in the form of ten questions, that should be answered when designing such systems. They consider that swarm safety is larger than simply analyzing failure modes. Questions related to ethics, legality, accountability, security are also listed and as a result, should provide a more thorough consideration of all socio-technical risks robot swarms face. 
 
 In \cite{higgins2009threats}, the security challenges of robots swarms are presented. Security is defined as the state of being protected from risks originating from hostile and malicious intentions. The security of new technologies is usually not included in its design process, typically it is with the rise of the technology that security concerns appear. To prevent any unwanted consequences, the paper presents the security challenges robot swarms will face in an attempt of including this component in the design process of the new technology. However, only security threats are considered and risk, as something not malicious, is not examined.
@@ -115,9 +115,9 @@ In SPIDER \cite{hunt2020spider}, multiple agents are tasked with chain formation
 
 
 
-\section{Fault detection}
-
-A taxonomy of the faults affecting robotic systems is presented in \cite{khalastchi2018fault}. Hardware faults affect physical components of the system. They compromise the sensing and acting abilities of the robots. Software faults affect the behaviour of the robots and are caused by faulty algorithms and/or faulty implementations. Interaction faults affect the dynamics of the robotic system and are caused by exogenous events. Hopefully, fault detection methods have been developed to mitigate the presence of faults in robotic systems. They are divided into three big families: data-driven; model-based; knowledge-based \cite{khalastchi2018fault}. 
+\section{Fault Detection}
+\label{sec:faultdetection}
+A taxonomy of the faults affecting robotic systems is presented in \cite{khalastchi2018fault}. They compromise the sensing and acting abilities of the robots. Understanding faults and exploring the methods to detect them is of interest as they can be the result of an excessive exposure to risk. Although the algorithms developed reduce considerably the likelihood of failures, they do not guarantee fault-free operation. Therefore, rapidly detecting faults is still of importance and could be added as an additional layer to the robotic system for increased tolerance to risk. Software faults affect the behaviour of the robots and are caused by faulty algorithms and/or faulty implementations. Interaction faults affect the dynamics of the robotic system and are caused by exogenous events. Hopefully, fault detection methods have been developed to mitigate the presence of faults in robotic systems. They are divided into three big families: data-driven; model-based; knowledge-based \cite{khalastchi2018fault}. 
 
 \begin{itemize}
 \item \textbf{Data-driven} approaches use sensor data and compare it to known faults, to past normal/abnormal behaviors or to the behavior of neighbour agents. Using statistical tools, data-driven approaches compute the deviation of the data and classify it as normal/abnormal depending on the extent of this deviation.
@@ -125,7 +125,7 @@ A taxonomy of the faults affecting robotic systems is presented in \cite{khalast
 \item \textbf{Knowledge-based} approaches are similar to the way a human would perform fault detection. A fault is quickly associated with its cause. Faults are typically represented in a tree structure where the fault can be linked backwards to where it originated. It is particularly useful for fault isolation.
 \end{itemize}
 
-Outlier detection methodologies have been widely used for identifying anomalies that could be the result of a fault. A definition of “outlier” was proposed by Grubbs (Grubbs, 1969): 
+Outlier detection methodologies have been widely used for identifying anomalies that could be the result of a fault. A definition of “outlier” was proposed by Grubbs in \cite{hodge2004survey}: 
 
 \begin{center}
 \textit{An outlying observation, or outlier, is one that appears to deviate

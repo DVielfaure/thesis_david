@@ -1,5 +1,12 @@
 \Chapter{ARTICLE 1: DORA: DISTRIBUTED ONLINE RISK-AWARE EXPLORER}\label{sec:Theme1}
  
+\noindent\fbox{%
+    \parbox{\textwidth}{%
+        \textbf{Preface:} This chapter presents a risk-aware coverage algorithm that maximizes the amount of terrain covered by the robots while minimizing the risk to which robots expose themselves in the process. The algorithm leverages distributed belief maps to share across the swarm the risk belief and the information gain belief associated with areas of the environment. Using a control policy based on risk and information gain, a movement vector that encompasses both objectives is computed locally and provides good short term trajectory planning to the robots. The approach is validated through exhaustive simulations and its real-world applicability is verified through physical experiments.
+        \\\\
+        \textbf{Full Citation:} D Vielfaure, S Arseneault, P-Y Lajoie, G Beltrame. ``DORA: Distributed Online Risk-Aware Explorer''. 2022.  IEEE International Conference on Robotics and Automation (ICRA).
+    }%
+}\\
 
 \section{Abstract}
     Exploration of unknown environments is an important challenge in the
@@ -279,7 +286,7 @@ because no information can be gained if a robot failed, which means that avoidin
 implicitly leads to more opportunities of gaining information
 \cite{schwagerMultirobotControlPolicy2017}.
 
-\begin{figure}[h]
+\begin{figure}[htbp]
 	\centering
     \includegraphics[width=0.95\columnwidth]{images/Moore.png}
     \caption{$\bm{x}_i$'s neighborhood. $\bm{n}_{i,0} = (-1, 1)$ is neighbor 0's offset from $\bm{x}_i$.}
@@ -386,7 +393,7 @@ A constant search speed enables a fair comparison with the baselines detailed in
 % \end{algorithm}
 
 
-% \begin{figure*}
+% \begin{figure*}[htbp]
 %      \centering
 %      \begin{subfigure}{0.30\textwidth}
 %          \centering
@@ -512,7 +519,7 @@ if $f_i=1$, the robot stops exploring. We added 5 randomly distributed
 0.8m x 0.8m obstacles to verify the robot's ability to
 perform exploration even in cluttered environments.
 
-% \begin{figure*}
+% \begin{figure*}[htbp]
 %     \centering
 %     \begin{subfigure}{0.32\textwidth}
 %         \includegraphics[width=\textwidth]{images/explored_10.png}
@@ -571,14 +578,7 @@ objective. We also compare DORA-Explorer with a random walk algorithm as a
 baseline it absolutely needs to outperform. These two baselines are
 commonly used for the exploration of unknown environments in the field
 of swarm robotics. They do not take risk into account, but to the best
-of our knowledge, no other existing swarm exploration strategy does. To address this issue, we could have modified the baselines to take risk into account, but chose against it. Adding risk thresholds for movement could be considered. However, if the robots find themselves in radiation hotspots, they might remain stuck in these locations because all surrounding cells will a have similar/equal risk which is too high to allow movement, resulting in fatal stagnation. 
-
-% Obstacle avoidance algorithms could have also been adapted to a risk avoidance context and serve as a baseline for DORA-Explorer. However, taking account of varying levels of risk would have been challenging. Again, it is hard to determine the threshold on risk level after which a cell should be considered as containing an obstacle.
-
-% For the FBE method, a possibility would have been to treat radiation sources as obstacles and use an obstacle avoidance mechanism to stay away from them.
-% However, there are two issues with this. First, these algorithms mostly focus on avoiding one obstacle at a time (the closest one), and therefore do not consider the effect of combined obstacles. This would not make sense anyway: two obstacles cannot be at the same location, while radiation sources can have a combined effect in one location. Second, these algorithms usually detect the presence of an obstacle in a binary way and are thus ill-suited for the presence of a gradual risk.
-
-The first metric used to assess the validity of our approach is the
+of our knowledge, no other existing swarm exploration strategy does. To address this issue, we could have modified the baselines to take risk into account, but chose against it. Adding risk thresholds for movement could be considered. However, if the robots find themselves in radiation hotspots, they might remain stuck in these locations because all surrounding cells will a have similar/equal risk which is too high to allow movement, resulting in fatal stagnation. The first metric used to assess the validity of our approach is the
 number of robots which remain active (not failed) over time. This is
 perhaps the most important metric because it shows how well DORA-Explorer
 performs in terms of risk avoidance, i.e. its main objective. The
@@ -593,23 +593,23 @@ the algorithms can scale to large number of robots. We also ran simulations to s
 
 
 \subsection{Results}
-
-\begin{figure}[]
+The following results are an average of the 50 simulation runs of each algorithm. 
+\begin{figure}[htbp]
     \centering
-    \includegraphics[width=1\columnwidth]{images/cell_explored.png}
+    \includegraphics[width=0.95\columnwidth]{images/cell_explored.png}
     \caption{Performance comparison of DORA-Explorer, FBE and random walk for number of explored cells at the end of the simulation.}
     \label{results:exploration}
 \end{figure}
 
-\begin{figure}[]
+\begin{figure}[htbp]
     \centering
-    \includegraphics[width=1\columnwidth]{images/active_robot.png}
+    \includegraphics[width=0.95\columnwidth]{images/active_robot.png}
     \caption{Performance comparison of DORA-Explorer, FBE and random walk for number of active robots at the end of the simulation.}
     \label{results:active}
 \end{figure}
 
 
-The following results are an average of the 50 simulation runs of each algorithm. Results from Fig. \ref{results:exploration} show that FBE
+Results from Fig. \ref{results:exploration} show that FBE
 achieves slightly higher exploration coverage than DORA-Explorer, but this
 gap in performance decreases as the number of robots increases. This
 is an expected result, because DORA-Explorer's main goal is not to achieve
@@ -631,7 +631,7 @@ arbitrarily selected simulation where N = 20 for each algorithm.  In
 other words, it represents which cells were explored by each algorithm
 and the sensed radiation intensity associated with them for one specific run. 
 
-\begin{figure}[h]
+\begin{figure}[htbp]
     \centering
     \subfigure[]
         {\includegraphics[width=0.47\textwidth]{images/heatmap_random.png}
@@ -695,7 +695,7 @@ constant for different number of agents. The small increase in data
 transmission with increasing number of robots can be attributed to
 packet collision. 
 
-\begin{figure}[h]
+\begin{figure}[htbp]
     \centering
     \includegraphics[width=0.97\columnwidth]{images/communication.png}
     \caption{Communication costs for DORA-Explorer and FBE}
@@ -704,7 +704,7 @@ packet collision.
 
 Results from Fig. \ref{results:parameters} show the performance of DORA-Explorer with varying ratios of risk gain $\alpha$ to exploration gain $\beta$. The experiments were carried with 10 robots. Results show that the number of remaining active robots at the end of the simulation only increases with a higher ratio. This is the expected behaviour as increasing the ratio corresponds to giving more importance to the risk avoidance gain from (\ref{eq:movement}). As for the number of cells explored, the relationship is not monotonic. In our experiments, a ratio $\alpha / \beta = 2$ provided the best result in terms of number of cells explored. For lower ratios, the robotic team is increasingly impacted by failures which in turns worsen the exploration performance. For higher ratios, the robot are too careful and don't explore as much the environment.
 
-\begin{figure}[h]
+\begin{figure}[htbp]
     \centering
     \includegraphics[width=1\columnwidth]{images/parameter.png}
     \caption{Performance of DORA-Explorer with varying ratios of $\alpha/\beta$}
@@ -742,7 +742,7 @@ walk algorithms.
 \subsection{Results}
 The following results are an average of the 5 runs of each algorithm on physical robots.
 
-\begin{figure}[H]
+\begin{figure}[htbp]
     \centering
     \captionsetup{belowskip=-5pt}
     \includegraphics[width=0.82\columnwidth]{images/explored.png}
@@ -750,7 +750,7 @@ The following results are an average of the 5 runs of each algorithm on physical
     \label{results:cells_explored_physical}
 \end{figure}
 
-\begin{figure}[H]
+\begin{figure}[htbp]
     \centering
     \captionsetup{belowskip=-5pt}
     \includegraphics[width=0.82\columnwidth]{images/activerobots.png}
